@@ -1,0 +1,29 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --pink : rgb(236, 112, 133);
+    --pink2: rgb(247, 10, 81);
+}
+body{
+    padding: 5% 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    background-color: var(--pink);
+    padding: 3%;
+    text-align: center;
+    color: white;
+}
+main{
+    width: 40%;
+}
+form{
+    padding: 3% 1%;
+    
+}

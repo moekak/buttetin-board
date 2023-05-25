@@ -1,0 +1,165 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+:root{
+    --pink : rgb(236, 112, 133);
+    --pink2: rgb(247, 10, 81);
+}
+body{
+    padding: 5% 8%;
+}
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+.search-container{
+    width: 30%;
+}
+
+.search{
+    border-radius: 50px;
+    padding: 3%;
+    border: 1px solid rgba(0, 0, 0, 0.171);
+    font-weight: bold;
+    width: 100%;
+}
+::placeholder{
+    color: rgba(0, 0, 0, 0.384);
+}
+.fa-search{
+    left: 85%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    color: rgba(0, 0, 0, 0.384);
+ 
+}
+.text{
+    width: 100%;
+}
+
+.post{
+    text-decoration: none;
+    color: white;
+}
+.post-btn{
+    background-color: var(--pink2);
+    padding: 1% 2%;
+    border-radius: 50px;
+}
+.fa-pen{
+    color: white;
+}
+.bg{
+    background-color: rgba(0, 0, 0, 0.137);
+}
+main{
+  
+    padding: 4%;
+    margin: 5% 0;
+}
+.dott{
+    color: var(--pink);
+}
+.avatar{
+    border-radius: 50%;
+    text-align: center;
+}
+button{
+    outline: none;
+    border: none;
+}
+.comment-container{
+    border-radius: 50px;
+    width: max-content;
+    color: white;
+    padding: 1% 2%;
+
+    background-color: rgb(50, 50, 82);
+}
+.like-container{
+    border-radius: 50px;
+    width: max-content;
+    color: white;
+    padding: 1% 2%;
+
+    background-color: var(--pink2);
+}
+.comment-section{
+    display: flex;
+    gap: 2%;
+    margin-bottom: 5%;
+}
+.main-img{
+    object-fit: cover;
+   max-width: 100%;
+   height: 100%;
+}
+.post-container{
+   
+    margin: 3% 5%;
+    height: 16vw;
+    width: 100%;
+   
+    
+}
+.today{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    display: flex;
+    align-items: flex-start;
+    gap: 4%;
+    padding: 4%;
+    width: 100%;
+}
+.text h4{
+    font-size: 1.3rem;
+    font-weight: bolder;
+    color: rgb(50, 50, 82);
+    padding-bottom: 2%;
+}
+.text p{
+    color: rgba(0, 0, 0, 0.438);
+}
+.icon{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.438);
+}
+.left{
+    background-color: white;
+
+
+}
+.right{
+    height: max-content;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: start;
+    width: 30%;
+    height: 100%;
+}
+.comment-section{
+    padding: 3%;
+
+}
