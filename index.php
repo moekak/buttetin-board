@@ -8,11 +8,6 @@
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     // print_r($posts)
-
-
-
-
-
 ?>
 
 
@@ -40,10 +35,9 @@
         </div>
     </nav>
     <main class="bg">
-        <div class="today">
-            <p><span class="dott">●</span> Today</p>
-            <?php foreach ($posts as $post) :?>
-            <div class="post-container">
+        <p ><span class="dott">●</span> Today</p>
+        <?php foreach ($posts as $post) :?>
+            <div class=" post-container">
                 <div class="left">
                     <div class="container">
                         <div class="icon">
@@ -62,16 +56,22 @@
                                     <i class="fas fa-heart"></i>
                                     <a class="like">Liked</a>
                                 </div>
+                                <div class="delete-btn">
+                                    <form action="delete.php" method="post">
+                                        <i class="fas fa-trash-alt"></i>
+                                        <input type="hidden" name="id" value="<?php echo $post["id"]?>">
+                                        <button class="submit-btn" type="submit">Delete</button>
+                                </form>
+                                </a>
                             </div>
 
-
+                            </div>
+                            
                         </div>
                     </div>
-
                 </div>
             </div>
-            <?php endforeach ;?>
-        </div>
+        <?php endforeach ;?>
         <!-- <div class="today">
             <p><span class="dott">●</span> Yesterday</p>
             <div class="post-container">

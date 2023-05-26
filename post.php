@@ -5,22 +5,35 @@
 
     $title = "";
     $body = "";
+    $date = "";
+    $error_title = "";
+    $error_body = "";
+    
 
     if(isset($_POST["submit"])){
+
         if($_POST["title"]){
             $title = $_POST["title"];
+        } else{
+            $error_title= "title is required";
         }
-    
-       
         if($_POST["body"]){
             $body = $_POST["body"];
+        } else{
+            $error_body = "body is required";
         }
-    
-    }
-   
-    echo $title
+        $date = date('Y-m-d H:i:s');
 
-   
+      
+    }
+    if(!$error_body && !$error_title && isset($_POST["submit"])){ 
+        $statement =$pdo->prepare("INSERT INTO `board-table` (`title`, `body`, `date`) VALUES (:title, :body, :date)");
+        $statement->bindValue(':title', $title);
+        $statement->bindValue(':body', $body);
+        $statement->bindValue(':date', $date);
+        
+        $statement->execute();
+    }
 
 
 ?>
@@ -44,19 +57,47 @@
             <h1>What's up John</h1>
         </div>
         <form action="" method="post">
-            <div class="mb-5">
-                <label class="form-label">Title</label>
-                <input type="text" class="form-control" placeholder="write title here" name="title">
-            </div>
-            <div class="mb-5">
-                <label for="exampleFormControlTextarea1" class="form-label">body</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
-            </div>
-            <div class="mb-5">
-                <label for="formFile" class="form-label">Image</label>
-                <input class="form-control" type="file" id="formFile" name="image">
-            </div>
+          
+            <?php if(!$error_title){?>
+                <div class="mb-5">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" placeholder="write title here" name="title">
+                </div>
+            <?php } else {?>
+                <div class="mb-5">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control is-invalid" placeholder="write title here" name="title">
+                    <div id="validationServer03Feedback" class="invalid-feedback">
+                        This field is required
+                    </div>
+                </div>
+
+            <?php }?>
+            <?php if(!$error_body){?>
+                <div class="mb-5">
+                    <label for="exampleFormControlTextarea1" class="form-label">body</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                </div>
+            <?php } else{?>
+                <div class="mb-5">
+                    <label for="exampleFormControlTextarea1" class="form-label">body</label>
+                    <textarea class="form-control  is-invalid" id="exampleFormControlTextarea1" rows="3" name="body"></textarea>
+                    <div id="validationServer03Feedback" class="invalid-feedback">
+                        This field is requiured.
+                    </div>
+                </div>
+               
+            <?php }?>
+
+                <div class="mb-5">
+                    <label for="formFile" class="form-label">Image</label>
+                    <input class="form-control" type="file" id="formFile" name="image">
+                </div>
+
+            
+            
             <input type="submit" class="btn btn-primary" name="submit" value="submit">
+            <a href="index.php"><button type="button" class="btn btn-secondary">return</button></a>
         </form>
     </main>
 

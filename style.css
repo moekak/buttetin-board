@@ -9,11 +9,29 @@
 }
 body{
     padding: 5% 8%;
+    max-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.137);
+    
 }
 nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+}
+main{
+   
+    margin-top: 5%;
+    width: 80%;
+}
+.post-container{
+    width: 100%;
+    margin: 3% 0;
 }
 
 .relative{
@@ -46,30 +64,34 @@ nav{
     color: rgba(0, 0, 0, 0.384);
  
 }
-.text{
-    width: 100%;
+.left{
+    background-color: white;
+    padding: 4% 3%;
 }
+
 
 .post{
     text-decoration: none;
     color: white;
+    display: flex;
+    flex-direction: column;
+
 }
 .post-btn{
     background-color: var(--pink2);
     padding: 1% 2%;
     border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .fa-pen{
     color: white;
 }
-.bg{
+/* .bg{
     background-color: rgba(0, 0, 0, 0.137);
-}
-main{
-  
-    padding: 4%;
-    margin: 5% 0;
-}
+} */
+
 .dott{
     color: var(--pink);
 }
@@ -100,33 +122,27 @@ button{
 .comment-section{
     display: flex;
     gap: 2%;
-    margin-bottom: 5%;
+    padding-top: 3%;
+
 }
 .main-img{
     object-fit: cover;
    max-width: 100%;
    height: 100%;
 }
-.post-container{
-   
-    margin: 3% 5%;
-    height: 16vw;
-    width: 100%;
-   
-    
-}
-.today{
+
+/* .today{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+} */
 .container{
     display: flex;
-    align-items: flex-start;
-    gap: 4%;
+    /* align-items: flex-start;
+ 
     padding: 4%;
-    width: 100%;
+    width: 100%; */
 }
 .text h4{
     font-size: 1.3rem;
@@ -136,30 +152,43 @@ button{
 }
 .text p{
     color: rgba(0, 0, 0, 0.438);
+    overflow-wrap: break-word;
+    padding: 2% 0;
+   
 }
+
 .icon{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     color: rgba(0, 0, 0, 0.438);
+    width: 20%;
+    gap: 6%;
 }
-.left{
-    background-color: white;
 
-
-}
-.right{
-    height: max-content;
-    width: max-content;
+.text{
+    width: 80%;
     display: flex;
     flex-direction: column;
-    align-items: self-start;
-    justify-content: start;
-    width: 30%;
-    height: 100%;
+ 
+   
 }
-.comment-section{
-    padding: 3%;
+.delete-btn{
+    background-color: rgba(0, 0, 0, 0.137);  
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding: 0 1.4%;
+    border-radius: 50px;
+    margin-left: 10%;
+    color: rgba(0, 0, 0, 0.349);
+ 
+}
 
+button{
+    background-color: transparent;
+}
+.submit-btn{
+    color: rgba(0, 0, 0, 0.349);
 }
