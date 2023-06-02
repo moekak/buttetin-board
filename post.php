@@ -2,6 +2,9 @@
     /** @var $pdo \PDO */
     require_once "DB.php";
 
+    // ユーザーIDをuser tableから取り出す処理
+    $statement = $pdo->prepare("SELECT * FROM `user` WHERE  email = :email");
+
 
     $title = "";
     $body = "";

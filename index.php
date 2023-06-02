@@ -25,6 +25,7 @@
 
 <body>
     <nav>
+        <a href="session/signUp.php">signup</a>
         <div class="search-container relative">
             <input type="search" class="search" placeholder="Search">
             <i class="fas fa-search absolute"></i>
