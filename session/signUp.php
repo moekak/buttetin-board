@@ -1,27 +1,57 @@
 <?php
+
+
 /** @var $pdo \PDO */
 require_once "../DB.php";
 
 $username = "";
 $email = "";
 $password = "";
+$icon = "";
 $hashed_password = "";
 $submit = "";
 $errorsArray = [];
 
+if (!is_dir('images')) {
+    mkdir('images');
+}
+
+
 if (isset($_POST["submit"])) {
-    if ($_POST["username"]) {
+    if (isset($_POST["username"])) {
         $username = $_POST["username"];
     }
-    if ($_POST["email"]) {
+    if (isset($_POST["email"])) {
         $email = $_POST["email"];
     }
-    if ($_POST["password"]) {
+    if (isset($_POST["password"])) {
         $password = $_POST["password"];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     }
+    if (isset($_FILES["icon"])) {
+        $icon = $_FILES["icon"] ?? null;
+        $imagePath = "";
+    }
 
+    if ($icon && $icon["tmp_name"]) {
+        $imagePath = 'images/' . randomString(8) . '/' . $icon["name"];
+        mkdir(dirname($imagePath));
+        move_uploaded_file($icon["tmp_name"], $imagePath);
+    }
 }
+
+function randomString($n)
+{
+    $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $str = "";
+    for ($i = 0; $i < $n; $i++) {
+        $index = rand(0, strlen($characters) - 1);
+        $str = $str . $characters[$index];
+    }
+    return $str;
+}
+
+
 
 // 同じメールアドレスかどうかチェックする処理
 if (isset($_POST["submit"]) && $username && $email && $password) {
@@ -30,25 +60,40 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     $statement->bindValue(':email', $email);
     $statement->execute();
     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
-    
+
 
     if ($userInfo["email"] === $email) {
         $errorsArray[] = "this email address is already registered";
-
     } else {
         if (isset($_POST["submit"]) && $username && $email && $password) {
-            $statement = $pdo->prepare("INSERT INTO `user` (`username`, `email`, `password`) VALUES (:username, :email, :password)");
+            $statement = $pdo->prepare("INSERT INTO `user` (`username`, `email`, `password`, `icon`) VALUES (:username, :email, :password, :icon)");
             $statement->bindValue(':username', $username);
             $statement->bindValue(':email', $email);
             $statement->bindValue(':password', $hashed_password);
+            $statement->bindValue(':icon', $imagePath);
 
             $statement->execute();
 
+            $user_id = $pdo->lastInsertId();
+
+            session_start();
+
+            if ($user_id) {
+                echo $_SESSION["user_id"];
+                $_SESSION["user_id"] = $user_id;
+            }
         }
+
+
+
+
 
         header("Location: ../index.php");
     }
 }
+
+
+
 
 ?>
 
@@ -68,17 +113,17 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     <main>
         <div class="signUp-form">
             <h1>Sign up</h1>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="icon">
                     <img src="img/user-dummy.png" alt="" class="user">
-                    <input type="file">
+                    <input type="file" name="icon">
                 </div>
-                <div class="container ">
+                <div class="container">
                     <div class="name">
                         <div class="title">
                             <label for="">username</label>
                         </div>
-                        <input type="text" placeholder="john smith" name="username" required >
+                        <input type="text" placeholder="john smith" name="username" required>
                     </div>
 
                 </div>
@@ -88,9 +133,9 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
                             <label for="" id="js_email_title">email</label>
                         </div>
                         <input type="email" placeholder="example@gmail.com" required name="email" id="js_email">
-                        <?php if($errorsArray) :?>
-                          <p class="red padding_t20">this email address is already registered</p>
-                        <?php endif ;?>
+                        <?php if ($errorsArray) : ?>
+                            <p class="red padding_t20">this email address is already registered</p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="container">
@@ -98,8 +143,7 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
                         <div class="title">
                             <label for="">password</label>
                         </div>
-                        <input type="current-password" minlength="6" required placeholder="at least 6 characters"
-                            name="password">
+                        <input type="current-password" minlength="6" required placeholder="at least 6 characters" name="password">
                     </div>
                 </div>
                 <div class="container">
@@ -114,15 +158,15 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     </main>
 
     <script>
-      const input = document.getElementById("js_email");
-      const title = document.getElementById("js_email_title")
+        const input = document.getElementById("js_email");
+        const title = document.getElementById("js_email_title")
 
-      <?php if($errorsArray) {?>
-        input.style.border = "2px solid red";
-        input.style.backgroundColor = "rgb(255, 0, 0, 0.3)"
-        input.style.color = "red"
-        title.style.color = "red";
-      <?php }?>
+        <?php if ($errorsArray) { ?>
+            input.style.border = "2px solid red";
+            input.style.backgroundColor = "rgb(255, 0, 0, 0.3)"
+            input.style.color = "red"
+            title.style.color = "red";
+        <?php } ?>
     </script>
 </body>
 

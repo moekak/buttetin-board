@@ -1,16 +1,20 @@
 <?php
+ session_start();
     /** @var $pdo \PDO */
     require_once "DB.php";
 
-    // ユーザーIDをuser tableから取り出す処理
-    $statement = $pdo->prepare("SELECT * FROM `user` WHERE  email = :email");
-
+   
+    
+  
+ 
+    $user_id = "";
 
     $title = "";
     $body = "";
     $date = "";
     $error_title = "";
     $error_body = "";
+    $user = "";
     
 
     if(isset($_POST["submit"])){
@@ -25,17 +29,34 @@
         } else{
             $error_body = "body is required";
         }
+
+    
         $date = date('Y-m-d H:i:s');
+
+    
+      
 
       
     }
-    if(!$error_body && !$error_title && isset($_POST["submit"])){ 
-        $statement =$pdo->prepare("INSERT INTO `board-table` (`title`, `body`, `date`) VALUES (:title, :body, :date)");
+    if(!$error_body && !$error_title &&  isset($_POST["submit"])){ 
+        if(isset($_SESSION["user_id"])){
+            $user_id = $_SESSION["user_id"];
+         
+        } 
+     
+        $statement =$pdo->prepare("INSERT INTO `board-table` (`title`, `body`, `date`, `user_id`) VALUES (:title, :body, :date, :user_id)");
         $statement->bindValue(':title', $title);
         $statement->bindValue(':body', $body);
         $statement->bindValue(':date', $date);
+        $statement->bindValue(':user_id', $user_id);
+   
         
         $statement->execute();
+
+        header("Location: index.php");
+
+
+        
     }
 
 
@@ -96,9 +117,6 @@
                     <label for="formFile" class="form-label">Image</label>
                     <input class="form-control" type="file" id="formFile" name="image">
                 </div>
-
-            
-            
             <input type="submit" class="btn btn-primary" name="submit" value="submit">
             <a href="index.php"><button type="button" class="btn btn-secondary">return</button></a>
         </form>

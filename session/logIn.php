@@ -6,6 +6,7 @@ $username = "";
 $email = "";
 $password = "";
 $submit = "";
+$action = "";
 
 if (isset($_POST["submit"])) {
     if ($_POST["username"]) {
@@ -26,18 +27,18 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     $statement->bindValue(':email', $email);
     $statement->execute();
     $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
-
-    echo $userInfo["password"];
-
-  
-
+    
+    echo $userInfo["id"];
 
     if($userInfo && password_verify($password, $userInfo["password"])){
-        echo "success";
+        $action =  "../index.php";
     } else{
+        $action = "";
         echo "fail";
     }
 }
+
+
 
 ?>
 
@@ -57,7 +58,7 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     <main>
         <div class="signUp-form">
             <h1>Log in</h1>
-            <form action="" method="post">
+            <form action="<?php echo $action?>" method="post">
                 <div class="container ">
                     <div class="name">
                         <div class="title">
@@ -83,6 +84,7 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
                         <input type="current-password" minlength="6" name="password" required
                             placeholder="at least 6 characters">
                     </div>
+                    <input type="hidden" value="<?= $userInfo["id"]?>" name="user_id">
                 </div>
                 <div class="container">
                     <input type="submit" value="Log in" class="submit" name="submit">
