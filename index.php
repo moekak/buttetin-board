@@ -1,7 +1,6 @@
 <?php
 
-/** @var $pdo \PDO */
-require_once "DB.php";
+
 
 
 // $statement = $pdo->prepare("UPDATE `board-table` SET `user_id` = :user_id  WHERE ");
@@ -10,9 +9,9 @@ require_once "DB.php";
 
 
 
-$statement = $pdo->prepare("SELECT * FROM `board-table` ");
-$statement->execute();
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+// $statement = $pdo->prepare("SELECT * FROM `board-table` ");
+// $statement->execute();
+// $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 // print_r($posts)
 ?>
@@ -32,7 +31,7 @@ $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <nav>
-        <a href="session/signUp.php">signup</a>
+        <a href="session/view/signUp.php">signup</a>
         <div class="search-container relative">
             <input type="search" class="search" placeholder="Search">
             <i class="fas fa-search absolute"></i>
