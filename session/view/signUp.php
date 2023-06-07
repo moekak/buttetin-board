@@ -1,9 +1,6 @@
 <?php
-
-
-
-
-
+require_once(dirname(__FILE__) . "../../app/function/Validation.php");
+session_start();
 
 ?>
 
@@ -15,7 +12,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/signUp.css">
+    <link rel="stylesheet" href="../assets/css/signUp.css">
+    <style>
+        #style{
+            border: <?= $_SESSION["style"][0] ?>;
+        }
+
+        #label{
+            color: <?= $_SESSION["style"][1] ?>
+            
+        }
+    </style>
     <title>Document</title>
 </head>
 
@@ -40,12 +47,12 @@
                 <div class="container">
                     <div class="email">
                         <div class="title">
-                            <label for="" id="js_email_title">email</label>
+                            <label for="" id="label">email</label>
                         </div>
-                        <input type="email" placeholder="example@gmail.com" required name="email" id="js_email">
-                        <?php //if ($errorsArray): ?>
-                            <!-- <p class="red padding_t20">this email address is already registered</p> -->
-                        <?php //endif;?>
+                        <input type="email" placeholder="example@gmail.com" required name="email" id="style">
+                        <?php if (isset($_SESSION["style"])): ?>
+                            <p class="red padding_t20">this email address is already registered</p>
+                        <?php endif;?>
                     </div>
                 </div>
                 <div class="container">
@@ -61,23 +68,13 @@
                 </div>
             </form>
             <p>You already have your own account?</p> <br>
-            <p class="fontSize_1"><a href="../session/logIn.php" class="white">Log in</a></p>
+            <p class="fontSize_1"><a href="../view/logIn.php" class="white">Log in</a></p>
 
 
         </div>
     </main>
 
-    <script>
-        const input = document.getElementById("js_email");
-        const title = document.getElementById("js_email_title")
-
-        <?php if ($errorsArray) {?>
-            input.style.border = "2px solid red";
-            input.style.backgroundColor = "rgb(255, 0, 0, 0.3)"
-            input.style.color = "red"
-            title.style.color = "red";
-        <?php }?>
-    </script>
+    
 </body>
 
 </html>

@@ -1,7 +1,13 @@
 <?php
+require_once(dirname(__FILE__) . "../../model/SignupModel.php");
 
 class Validation{
+    public $signup;
 
+    public function __construct(){
+        $this->signup = new SignupModel();
+    }
+    
     public function randomString($n){
         $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $str = "";
@@ -11,6 +17,7 @@ class Validation{
         }
         return $str;
     }
+
 }
 
 

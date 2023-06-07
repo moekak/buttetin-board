@@ -1,42 +1,6 @@
 <?php
-/** @var $pdo \PDO */
-require_once "../DB.php";
-
-$username = "";
-$email = "";
-$password = "";
-$submit = "";
-$action = "";
-
-if (isset($_POST["submit"])) {
-    if ($_POST["username"]) {
-        $username = $_POST["username"];
-    }
-    if ($_POST["email"]) {
-        $email = $_POST["email"];
-    }
-    if ($_POST["password"]) {
-        $password = $_POST["password"];
-
-    }
-}
-
-if (isset($_POST["submit"]) && $username && $email && $password) {
-    $statement = $pdo->prepare("SELECT * FROM `user` WHERE username = :username AND email = :email");
-    $statement->bindValue(':username', $username);
-    $statement->bindValue(':email', $email);
-    $statement->execute();
-    $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
+session_start();
     
-    echo $userInfo["id"];
-
-    if($userInfo && password_verify($password, $userInfo["password"])){
-        $action =  "../index.php";
-    } else{
-        $action = "";
-        echo "fail";
-    }
-}
 
 
 
@@ -50,7 +14,7 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signUp.css">
+    <link rel="stylesheet" href="../assets/css/signUp.css">
     <title>Document</title>
 </head>
 
@@ -58,7 +22,10 @@ if (isset($_POST["submit"]) && $username && $email && $password) {
     <main>
         <div class="signUp-form">
             <h1>Log in</h1>
-            <form action="<?php echo $action?>" method="post">
+            <?php if (isset($_SESSION["error"])): ?>
+                <p class="red padding_t20 error">Log in failed! <br> Invalid username, email, or password!</p>
+            <?php endif;?>
+            <form action="../app/controller/loginController.php" method="post">
                 <div class="container ">
                     <div class="name">
                         <div class="title">

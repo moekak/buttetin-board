@@ -1,4 +1,5 @@
 <?php
+// require_once(dirname(__FILE__) . "/app/headerFn.php")
 
 
 
@@ -25,7 +26,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <script src="https://kit.fontawesome.com/49c418fc8e.js" crossorigin="anonymous"></script>
 </head>
 

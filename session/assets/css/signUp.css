@@ -147,3 +147,9 @@ form{
 label{
     font-weight: bold;
 }
+.error{
+    background-color: rgb(206, 167, 174);
+    padding: 5%;
+    border-radius: 10px;
+    margin-bottom: 3%;
+}
