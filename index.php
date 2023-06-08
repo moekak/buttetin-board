@@ -1,20 +1,10 @@
 <?php
-// require_once(dirname(__FILE__) . "/app/headerFn.php")
+require_once(dirname(__FILE__) . "/app/controller/controller.php");
+
+$path = "./images/"
 
 
 
-
-// $statement = $pdo->prepare("UPDATE `board-table` SET `user_id` = :user_id  WHERE ");
-// $statement->bindValue(':user_id', $user_id);
-// $statement->execute();
-
-
-
-// $statement = $pdo->prepare("SELECT * FROM `board-table` ");
-// $statement->execute();
-// $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-// print_r($posts)
 ?>
 
 
@@ -49,13 +39,13 @@
     </nav>
     <main class="bg">
         <p><span class="dott">●</span> Today</p>
-        <?php foreach ($posts as $post) : ?>
+        <?php foreach ($postData as $post) : ?>
             <div class=" post-container">
                 <div class="left">
                     <div class="container">
                         <div class="icon">
-                            <img src="https://i.pravatar.cc/90" alt="" class="avatar">
-                            <p>Andrew</p>
+                            <img src="<?php echo $path . $post["icon"] ?>" alt="" class="avatar">
+                            <p><?= $post["username"]?></p>
                         </div>
                         <div class="text">
                             <h4><?= $post["title"] ?></h4>

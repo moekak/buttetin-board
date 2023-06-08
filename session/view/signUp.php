@@ -32,7 +32,7 @@ session_start();
             <h1>Sign up</h1>
             <form action="../app/controller/SignupController.php" method="post" enctype="multipart/form-data">
                 <div class="icon">
-                    <img src="../img/user-dummy.png" alt="" class="user">
+                    <img src="../assets/img/user-dummy.png" alt="" class="user">
                     <input type="file" name="icon">
                 </div>
                 <div class="container">

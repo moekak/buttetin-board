@@ -5,6 +5,7 @@ require_once(dirname(__FILE__) . "/../function/Validation.php");
 require_once(dirname(__FILE__) . "/../model/signupModel.php");
 require_once(dirname(__FILE__) . "/../../app/function/changeStyle.php");
 
+
 session_start();
 
 
@@ -22,6 +23,7 @@ class signupFn{
     public $obj;
     public $emailCheck;
     public $style;
+    public $filename = "";
 
     public function __construct()
     {
@@ -40,7 +42,8 @@ class signupFn{
         } 
         
         if(!$emailData){
-            $this->emailCheck->insertUserInfo($this->username, $this->email, $this->hashed_password, $this->imagePath);
+            
+            $this->emailCheck->insertUserInfo($this->username, $this->email, $this->hashed_password, $this->filename);
             if($_SESSION["style"]){
                 echo "ok";
                 unset($_SESSION["style"]);
@@ -60,9 +63,7 @@ class signupFn{
 
 
     public function user($post, $file){
-        if(!is_dir('images')){
-            mkdir('../../images');
-        }
+       
         if (isset($_POST["username"])) {
             $this->username = $_POST["username"]; 
            
@@ -79,9 +80,11 @@ class signupFn{
         }
 
         if ($this->icon && $this->icon["tmp_name"]) {
-            $this->imagePath = '../../images/' . $this->obj->randomString(8) . '/' . $this->icon["name"];
-            mkdir(dirname($this->imagePath));
-            move_uploaded_file($this->icon["tmp_name"], $this->imagePath);
+            $this->filename = $this->obj->randomString(8) . '/' . $this->icon["name"];
+            $this->imagePath = '../../../images/';
+            
+            mkdir(dirname($this->imagePath. $this->filename));
+            move_uploaded_file($this->icon["tmp_name"], $this->imagePath. $this->filename);
         }
 
         $this->emailCheck();
