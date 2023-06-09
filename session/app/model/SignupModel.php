@@ -23,7 +23,7 @@ class SignupModel{
         $this->userInfo = $statement->fetch(PDO::FETCH_ASSOC);
     }
 
-    // 登録されたユーザーを出たーベースに登録する
+    // 登録されたユーザーをデーターベースに登録する
     public function insertUserInfo($username, $email, $hashed_password, $icon){
         if($username && $email && $hashed_password){
         
