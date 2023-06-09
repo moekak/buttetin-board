@@ -91,7 +91,8 @@ class model {
         $statement->bindValue(":post_id", $post_id);
         $statement->bindValue(":user_id", $user_id);
         $statement->execute();
-        $this->likeData = $statement->fetchColumn();
+        return $statement->fetchColumn();
+  
        
     }
     // いいねを消す処理

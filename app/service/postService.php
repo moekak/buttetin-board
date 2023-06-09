@@ -79,8 +79,7 @@ class postService
     // ライク処理
     public function likePost($post_id){
         if(isset($_SESSION["user_id"])){
-            $this->model->checkLikePost($post_id, $_SESSION["user_id"]);
-            $this->like = $this->model->likeData;
+            $this->like = $this->model->checkLikePost($post_id, $_SESSION["user_id"]);
             if($this->like){
                 $this->model->deleteLike($post_id, $_SESSION["user_id"]);
                 header("Location: ../../index.php");
