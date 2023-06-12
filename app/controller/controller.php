@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . "../../service/postService.php");
-require_once(dirname(__FILE__) . "../../service/getUserInfo.php");
+require_once(dirname(__FILE__) . "../../service/postServiceFn.php");
+require_once(dirname(__FILE__) . "../../service/getUserInfoFn.php");
 require_once(dirname(__FILE__) . "../../model/model.php");
 
 

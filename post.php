@@ -1,7 +1,6 @@
 <?php
  session_start();
-    /** @var $pdo \PDO */
-    require_once "DB.php";
+ 
 
    
     

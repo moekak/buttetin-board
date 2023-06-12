@@ -6,6 +6,9 @@ class changeStyle
     public $text;
     public $placeholder;
 
+    // likeの部分
+    public $likeColor;
+
     public function changeStyleSignin()
     {
 
@@ -25,5 +28,7 @@ class changeStyle
         session_start();
         $_SESSION["error"] = "error";
     }
+
+ 
 
 }

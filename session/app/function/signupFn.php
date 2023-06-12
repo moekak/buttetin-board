@@ -1,12 +1,12 @@
 <?php
 
 
-require_once(dirname(__FILE__) . "/../function/Validation.php");
+require_once(dirname(__FILE__) . "/../function/ValidationFn.php");
 require_once(dirname(__FILE__) . "/../model/signupModel.php");
-require_once(dirname(__FILE__) . "/../../app/function/changeStyle.php");
+require_once(dirname(__FILE__) . "/../../../app/service/changeStyleFn.php");
 
 
-session_start();
+
 
 
 
@@ -24,6 +24,7 @@ class signupFn{
     public $emailCheck;
     public $style;
     public $filename = "";
+    public $textSucess;
 
     public function __construct()
     {
@@ -45,14 +46,10 @@ class signupFn{
             
             $this->emailCheck->insertUserInfo($this->username, $this->email, $this->hashed_password, $this->filename);
             if($_SESSION["style"]){
-                echo "ok";
                 unset($_SESSION["style"]);
             }
-
-            
+      
             header("Location: ../../../index.php");
-            
-            
         } else{
             header("Location: ../../view/signUp.php");
             $this->style->changeStyleSignin();
@@ -88,7 +85,7 @@ class signupFn{
         }
 
         $this->emailCheck();
-        
+
     }
 }
 

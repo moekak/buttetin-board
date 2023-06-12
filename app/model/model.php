@@ -15,6 +15,8 @@ class model {
     public $likeCount;
     
 
+    
+
     public function __construct()
     {
         $this->pdo = new PDO('mysql:host=localhost;dbname=board', 'root');
@@ -103,13 +105,39 @@ class model {
         $statement->execute();
     }
     // 各投稿のいいねの件数を取得
-    public function countLike($post_id){
+    public function countLike($post_id){      
+
         $statement = $this->pdo->prepare("SELECT COUNT(*) FROM `like-table` WHERE post_id = :post_id");
         $statement->bindValue(":post_id", $post_id);
         $statement->execute();
-        $this->likeCount = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $this->likeCount = $statement->fetchColumn();
+    }
 
-        echo "w";
+
+    // コメントをデーターベースに保存する
+    public function insertComment($user_id, $post_id, $comment){
+        $statement = $this->pdo->prepare("INSERT INTO `comment`(`user_id`, `post_id`, `comment`) VALUES (:user_id, :post_id,:comment)");
+        $statement->bindValue(":user_id", $user_id);
+        $statement->bindValue(":post_id", $post_id);
+        $statement->bindValue(":comment", $comment);
+        $statement->execute();
+    }
+
+    // 詳細ページの投稿を取得する
+    public function getPostDetail($post_id){
+        $statement = $this->pdo->prepare("SELECT * FROM `board-table` WHERE id = :id");
+        $statement->bindValue(":id", $post_id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // テーブル結合の処理
+    public function joinPost($post_id){
+        $statement = $this->pdo->prepare("SELECT * FROM `board-table` INNER JOIN `user` ON `user`.`id` = `board-table`.`user_id` WHERE `board-table`.`id`=:id;");
+        $statement->bindValue(":id", $post_id);
+        $statement->execute();
+        return $statement->fetch();
+       
     }
 
 }

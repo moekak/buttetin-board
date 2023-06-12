@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . "../../service/postService.php");
+require_once(dirname(__FILE__) . "../../service/postServiceFn.php");
 
 $post = new postService();
 

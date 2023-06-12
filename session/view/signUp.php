@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . "../../app/function/Validation.php");
+require_once(dirname(__FILE__) . "../../app/function/ValidationFn.php");
 session_start();
 
 ?>
