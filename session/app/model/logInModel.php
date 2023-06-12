@@ -3,6 +3,7 @@
 class logInModel {
     public $pdo;
     public $userData;
+    public $userID;
     public function __construct(){
         $this->pdo = new PDO('mysql:host=localhost;dbname=board', 'root');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
@@ -15,5 +16,10 @@ class logInModel {
         $statement->execute();
 
         $this->userData = $statement->fetch(PDO::FETCH_ASSOC);
+        $this->userID = $this->userData["id"];
+       
+        
+    
+        
     }
 }

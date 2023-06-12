@@ -41,6 +41,7 @@ class loginFn
         $this->getUserData();
         $this->loginModel->checkUser($this->username, $this->email);
         $userData = $this->loginModel->userData;
+        
 
         var_dump($userData);
 
@@ -52,6 +53,10 @@ class loginFn
             if($_SESSION["error"]){
                 unset($_SESSION["error"]);
             }
+            $user_id = $this->loginModel->userID;
+
+            session_start();
+            $_SESSION["user_id"] = $user_id;
             header("Location: ../../../index.php");
         }
 

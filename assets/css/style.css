@@ -280,7 +280,7 @@ button{
 .nav-second{
     width: 20%;
     position: fixed;
-    transform: translateX(-300px);
+    transform: translateX(-500px);
     height: 100vh;
     background-color: rgb(56, 54, 54);
     top: 0;
