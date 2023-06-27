@@ -1,5 +1,6 @@
 <?php
 require_once dirname(__FILE__) . "../../model/model.php";
+require_once dirname(__FILE__) . "../../service/changeStyleFn.php";
 
 
 
@@ -27,11 +28,14 @@ class postService
     public $commentPostID;
     public $comment;
     public $detailData;
+    public $postComment;
+    public $service;
   
 
     public function __construct()
     {
         $this->model = new model();
+        $this->service = new changeStyle();
     }
 
     // データがpostで送られてきたら、変数に代入する処理
@@ -74,7 +78,7 @@ class postService
 // 投稿削除処理
     public function deletPost($id, $postUser_id){
     
-        echo $postUser_id;
+       
         if($_SESSION["user_id"] == $postUser_id){
             $this->model->deletePost($id);
             header("Location: ../../index.php");
@@ -86,17 +90,30 @@ class postService
     }
 
     // ライク処理
-    public function likePost($post_id){
-        echo $_SESSION["user_id"];
+    public function likePost($post_id, $post){
+    
         if(isset($_SESSION["user_id"])){
             $this->like = $this->model->checkLikePost($post_id, $_SESSION["user_id"]);
-            echo "ooo";
+     
             if($this->like){
                 $this->model->deleteLike($post_id, $_SESSION["user_id"]);
-                header("Location: ../../index.php");
+                $this->service->changeStyleLike2();
+                $_SESSION["like"] = "like";
+                if($post){
+                    header("Location: ../../postDetail.php");
+                } else{
+                    header("Location: ../../index.php");
+                }
             } else{
                 $this->model->likePost($_SESSION["user_id"], $post_id);
-                header("Location: ../../index.php");
+                $this->service->changeStyleLike();
+                $_SESSION["like"] = "removeLike";
+
+                if($post){
+                    header("Location: ../../postDetail.php");
+                } else{
+                    header("Location: ../../index.php");
+                }
             }
            
         } else{
@@ -143,6 +160,13 @@ class postService
     public function getDetailData($post_id){
         $this->detailData = $this->model->joinPost($post_id);
         $_SESSION["post"] = $this->detailData;
+        header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
+
+    }
+    // 詳細ページ取得
+    public function getPostCommentFn($post_id){
+        $this->postComment = $this->model->getPostComment($post_id);
+        $_SESSION["post_comment"] = $this->postComment;
         header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
 
     }

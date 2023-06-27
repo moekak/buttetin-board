@@ -5,6 +5,8 @@ class changeStyle
     public $border;
     public $text;
     public $placeholder;
+    public $likeBackground;
+    public $likeNum;
 
     // likeの部分
     public $likeColor;
@@ -29,6 +31,25 @@ class changeStyle
         $_SESSION["error"] = "error";
     }
 
+
+    public function changeStyleLike(){
+        $this->likeBackground = "red";
+        $this->likeNum = "red";
+        $likeArray = [$this->likeBackground, $this->likeNum];
+
+        session_start();
+        $_SESSION["likeStyle"] = $likeArray;
+        
+    }
+    public function changeStyleLike2(){
+        $this->likeBackground = "rgba(0, 0, 0, 0.575)";
+        $this->likeNum = "rgba(0, 0, 0, 0.575)";
+        $likeArray = [$this->likeBackground, $this->likeNum];
+
+        session_start();
+        $_SESSION["likeStyle"] = $likeArray;
+        
+    }
  
 
 }

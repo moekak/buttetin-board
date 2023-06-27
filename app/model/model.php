@@ -139,5 +139,13 @@ class model {
         return $statement->fetch();
        
     }
+    // 詳細ページの投稿のコメントを取得する
+    public function getPostComment($post_id){
+        $statement = $this->pdo->prepare("SELECT * FROM `comment` INNER JOIN `board-table` ON `comment`.`post_id` = `board-table`.`id` WHERE `board-table`.`id`=:id;");
+        $statement->bindValue(":id", $post_id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
 
 }
