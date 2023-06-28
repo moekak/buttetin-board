@@ -4,8 +4,18 @@ session_start();
 
 $path = "./images/";
 $posts = $_SESSION["postData"];
+// print_r($_SESSION["userData"]);
 
-$counts = $_SESSION["likesCount"];
+$userName = $_SESSION["username"];
+$userEmail = $_SESSION["email"];
+$userIcon=  $_SESSION["icon"];
+$date = $_SESSION["created_at"];
+$introduction = $_SESSION["introduction"];
+$country = $_SESSION["country"] ;
+$web = $_SESSION["web_site"];
+$dateTime = new DateTime($date);
+$month = $dateTime->format("F");
+$year = $dateTime->format("Y");
 
 ?>
 
@@ -33,7 +43,12 @@ $counts = $_SESSION["likesCount"];
                 <input type="file" name="icon">
                 <div class="input-icon">
                     <div class="camera2 absolute">
-                        <img src="./assets/img/user-dummy.png" class="user-icon3">
+                        <?php if ($userIcon) {?>
+                        <img src="<?php echo $path . $userIcon?>" alt="" class="user-icon3">
+                        <?php } else {?>
+                            <img src="./assets/img/user-dummy.png" class="user-icon3">
+                        <?php }?>
+                        
                     </div>
                     <input type="file" name="icon">
                 </div>
@@ -51,9 +66,15 @@ $counts = $_SESSION["likesCount"];
             </button>
         </div>
         <div class="info-detail">
-            <p class="personal-info font_size2 bold">test user</p>
-            <p class="personal-email">test@gmail.com</p>
-            <p class="join_date"><i class="far fa-calendar-alt"> Joined December 2013 </i></p>
+            <p class="personal-info font_size2 bold"><?=$userName?></p>
+            <p class="personal-email"><?=$userEmail?></p>
+            <p class="introdution"><?= $introduction?></p>
+            <p class="join_date"><i class="far fa-calendar-alt"> Joined <?= $month?> <?= $year?> </i></p>
+            <div class="detail-info">
+                <p class="place"><i class="fas fa-map-marker-alt"> </i> <?= $country?></p>
+                <a href="<?= $web?>" class="web" target="_blank"><i class="fas fa-link"></i> <?= $web?></a>
+            </div>
+            
             <div class="following-num">
                 <div class="follwing_number">
                     <p><span>1</span> Following</p>
@@ -72,6 +93,8 @@ $counts = $_SESSION["likesCount"];
         </div>
 
     </div>
+  
+
     <div class="bg main">
 
         <?php foreach ($posts as $post): ?>

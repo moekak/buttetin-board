@@ -170,4 +170,19 @@ class postService
         header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
 
     }
+    // コメント件数取得処理
+    // public function getCommentCount($post_id){
+    //     if($_POST["post_id"]){
+    //         $_SESSION["commentCount"] = $this->model->getCommentCount($post_id);
+     
+    //         header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
+    //     }
+    // }
+    // コメント件数update
+    public function updateCommentCount($post_id){
+        if($_POST["post_id"]){
+            $this->model->updateComment($post_id);
+            header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
+        }
+    }
 }

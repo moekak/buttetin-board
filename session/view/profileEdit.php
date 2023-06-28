@@ -1,5 +1,11 @@
 
+<?php
 
+require_once(dirname(__FILE__) . "../../../app/getCountry.php");
+
+
+$user_id =  $_POST["user_id"];
+?>
 
 
 
@@ -17,7 +23,7 @@
 
 <body>
     <div class="profile_edit_container">
-        <form action="../app/controller/editController.php" method="post">
+        <form action="../app/controller/editController.php" method="post" enctype="multipart/form-data">
             <div class="icon2 relative">
                 <img src="../../assets/img/bg.png" alt="" class="bg-img">
                 <div class="camera absolute">
@@ -35,20 +41,32 @@
             <div class="info-container ">
                 <div class="name-container">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name">
+                    <input type="text" id="name" name="username">
                 </div>
                 <div class="intro-container">
                     <label for="intro">Introduction</label>
-                    <textarea type="text" id="intro" name="intro"></textarea>
+                    <textarea type="text" id="intro" name="introduction"></textarea>
                 </div>
                 <div class="web-container">
                     <label for="web">Web</label>
-                    <input type="text" id="web" placeholder="Add your website" name="web">
+                    <input type="text" id="web" placeholder="Add your website" name="web_site">
                 </div>
                 <div class="bd-container">
                     <label for="bd">Birthday</label>
-                    <input type="text" id="bd" placeholder="Add your birthday" name="birthday">
+                    <input type="text" id="bd"  name="birthday" placeholder="YYYY/MM/DD">
                 </div>
+                <div class="place-container">
+                <label for="bd">Place</label>
+                    <select name="country" id="country">
+                        <option value="" class= "select">--select your country--</option>
+                        <?php foreach ($countryNames as $countryName){?>
+                            <option value="<?=$countryName?> ">
+                                <?=$countryName?>  
+                            </option>
+                        <?php }?>
+                    </select>
+                </div>
+                <input type="hidden" value="<?php echo $user_id?>" name="user_id">
 
             </div>
             <input type="submit" name="submit">

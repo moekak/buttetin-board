@@ -25,6 +25,7 @@ class signupFn{
     public $style;
     public $filename = "";
     public $textSucess;
+    public $now;
 
     public function __construct()
     {
@@ -43,8 +44,13 @@ class signupFn{
         } 
         
         if(!$emailData){
+            $this->now = date('Y-m-d H:i:s');
             
-            $this->emailCheck->insertUserInfo($this->username, $this->email, $this->hashed_password, $this->filename);
+            $this->emailCheck->insertUserInfo($this->username, $this->email, $this->hashed_password, $this->filename, $this->now);
+            $_SESSION["email"] = $this->email;
+            $_SESSION["username"] = $this->username;
+            $_SESSION["icon"] = $this->filename;
+            $_SESSION["created_at"] = $this->now;
             if($_SESSION["style"]){
                 unset($_SESSION["style"]);
             }

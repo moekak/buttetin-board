@@ -56,21 +56,45 @@ class model {
         $statement = $this->pdo->prepare("SELECT `icon` FROM `user` WHERE id = :id");
         $statement->bindValue(":id", $user_id);
         $statement->execute();
-        $this->userIcon = $statement->fetchColumn();
+        return $statement->fetchColumn();
     }
     // 名前を取り出す
     public function getName($user_id){
         $statement = $this->pdo->prepare("SELECT `username` FROM `user` WHERE id = :id");
         $statement->bindValue(":id", $user_id);
         $statement->execute();
-        $this->userName = $statement->fetchColumn();
+       return $statement->fetchColumn();
     }
     // メールを取り出す
     public function getEmail($user_id){
         $statement = $this->pdo->prepare("SELECT `email` FROM `user` WHERE id = :id");
         $statement->bindValue(":id", $user_id);
         $statement->execute();
-        $this->userEmail = $statement->fetchColumn();
+        return $statement->fetchColumn();
+    }
+    public function getIntro($user_id){
+        $statement = $this->pdo->prepare("SELECT `introduction` FROM `user` WHERE id = :id");
+        $statement->bindValue(":id", $user_id);
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+    public function getWeb($user_id){
+        $statement = $this->pdo->prepare("SELECT `web_site` FROM `user` WHERE id = :id");
+        $statement->bindValue(":id", $user_id);
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+    public function getBirthday($user_id){
+        $statement = $this->pdo->prepare("SELECT `birthday` FROM `user` WHERE id = :id");
+        $statement->bindValue(":id", $user_id);
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+    public function getDate($user_id){
+        $statement = $this->pdo->prepare("SELECT `created_at` FROM `user` WHERE id = :id");
+        $statement->bindValue(":id", $user_id);
+        $statement->execute();
+        return $statement->fetchColumn();
     }
 
     // 投稿削除する
@@ -147,5 +171,27 @@ class model {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
+    
 
+    // ユーザーの情報を取り出す
+    public function getUser($user_id){
+        $statement  = $this->pdo->prepare("SELECT * FROM `user` WHERE id = :id");
+        $statement ->bindValue(":id", $user_id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+    // コメント件数を獲得する
+    // public function getCommentCount($post_id){
+    //     $statement = $this->pdo->prepare("SELECT * FROM `board-table`");
+    //     $statement->bindValue(":id", $post_id);
+    //     $statement->execute();
+    //     return $statement->fetchAll(PDO::FETCH_ASSOC);
+    // }
+    // コメント件数をupdateする
+    public function updateComment($post_id){
+        $statement = $this->pdo->prepare("UPDATE `board-table` SET  comments_count= comments_count + 1 WHERE id = :id");
+        $statement->bindValue(":id", $post_id);
+        $statement->execute();
+    }
 }

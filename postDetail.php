@@ -8,9 +8,14 @@ $path = "./images/";
 // $posts = $_SESSION["postData"];
 $posts = ($_SESSION["post"]);
 $comments = $_SESSION["post_comment"];
-// print_r($comments);
+$userName = $_SESSION["username"];
+$userEmail = $_SESSION["email"];
+$userIcon = $_SESSION["icon"];
 
-// s
+$userId = "";
+if ($_SESSION["user_id"]) {
+    $userId = $_SESSION["user_id"];
+}
 
 ?>
 
@@ -40,7 +45,12 @@ $comments = $_SESSION["post_comment"];
             <?php }?>
             <p class="username"><?php echo $userName ?></p>
             <p class="userEmail"><?php echo $userEmail ?></p>
-            <button class="user-edit"><i class="fas fa-user-edit"></i></button>
+            <?php if ($userId) {?>
+            <form action="./session/view/profileEdit.php" method="post" class="form-edit">
+                <input type="hidden" value="<?=$userId?>" name="user_id">
+                <button class="user-edit"><i class="fas fa-user-edit"></i></button>
+            </form>
+            <?php }?>
             <div class="buttons-container w100">
                 <button class="like w100 flex">
                     <a href="" class="flex-left black gap8 w60">
@@ -100,23 +110,18 @@ $comments = $_SESSION["post_comment"];
                                     <a class="comment">12</a>
                                 </div>
                                 <div class="like-container">
-                                    <form action="./app/controller/likePost.php" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $posts["id"] ?>">
-                                        <button type="submit" class=" btn-submit">
-                                            <i class="far fa-heart"></i>
-                                            <?php echo $like->getLikeCount($posts[0]) ?>
-                                            <?php echo $like->likeCount ?>
-                                        </button>
-
-                                    </form>
+                                    <button type="submit" class=" btn-submit like-btn" data-post-id="<?php echo $posts["id"] ?>">
+                                        <i class="far fa-heart"></i>
+                                        <div class="post" id="<?php echo $posts["id"] ?>">
+                                            <p class="likeCount"><?php echo $posts["likes_count"] ?></p>
+                                        </div>
+                                    </button>
                                 </div>
                                 <div class="dislike-container">
-                                    <form action="">
-                                        <button type="submit" class="black btn-submit">
-                                            <i class="far fa-thumbs-down"></i>
-                                            <p>not interested</p>
-                                        </button>
-                                    </form>
+                                    <button type="submit" class="black btn-submit ">
+                                        <i class="far fa-thumbs-down"></i>
+                                        <p>not interested</p>
+                                    </button>
                                 </div>
                                 <div class="delete-btn">
                                     <form action="./app/controller/delete.php" method="post">
@@ -194,6 +199,37 @@ $comments = $_SESSION["post_comment"];
     </div>
     </div>
 
+
+    <script>
+    const likeBtn = document.querySelector(".like-btn");
+        likeBtn.addEventListener("click", () => {
+            let postId = likeBtn.dataset.postId
+            fetch("./app/api1.php", {
+                    // 第1引数に送り先
+                    method: "POST", // メソッド指定
+                    headers: {
+                        "Content-Type": "application/json"
+                    }, // jsonを指定
+                    body: JSON.stringify(postId), // json形式に変換して添付
+                })
+                .then((response) => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
+                .then((res) => {
+                    console.log(res); // やりたい処理
+                    // document.querySelectorAll(".post").forEach((post) => {
+                    //     if (post.id == postId) {
+                    //         post.querySelector(".likeCount").textContent = res[0][
+                    //             "likes_count"
+                    //         ];
+                    //     }
+
+                    // })
+
+                })
+                .catch((error) => {
+                    console.log(error); // エラー表示
+                });
+        })
+    </script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__). "../../model/model.php");
 
 
 $user_id = "";
@@ -12,6 +13,8 @@ class getUserInfo{
     public $iconData;
     public $userName;
     public $userEmail;
+    public $user_id;
+    public $userData;
 
     public function __construct()
     {
@@ -32,6 +35,21 @@ class getUserInfo{
         $this->userID = $_SESSION["user_id"];
         $this->model->getEmail($this->userID);
         $this->userEmail = $this->model->userEmail;
+    }
+
+    public function getUserData($user_id){
+        if(isset($_POST["user_id"])){
+            $_SESSION["email"] = $this->model->getEmail($user_id);
+            $_SESSION["username"] = $this->model->getName($user_id);
+            // $_SESSION["icon"] = $this->model->getIcon($user_id);
+            $_SESSION["intro"] = $this->model->getIntro($user_id);
+            // $_SESSION["userData"] = $this->userData;
+            $_SESSION["web"] = $this->model->getWeb($user_id);
+            $_SESSION["created_at"] = $this->model->getDate($user_id);
+            // print_r($_SESSION["userData"]);
+            // exit;
+            header("Location: ../../personalInfo.php");
+        }
     }
 }
 
