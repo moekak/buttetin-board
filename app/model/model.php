@@ -24,12 +24,13 @@ class model {
     }
 
     // 投稿のデータを保存する
-    public function insertData($user_id, $title, $body, $date){
+    public function insertData($user_id, $title, $body, $date, $image){
       
-        $statement = $this->pdo->prepare("INSERT INTO `board-table`(`user_id`, `title`, `body`, `date`) VALUES (:user_id, :title, :body, :date)");
+        $statement = $this->pdo->prepare("INSERT INTO `board-table`(`user_id`, `title`, `body`, `date`, `image`) VALUES (:user_id, :title, :body, :date, :image)");
         $statement->bindValue(":user_id", $user_id);
         $statement->bindValue(":title", $title);
         $statement->bindValue(":body", $body);
+        $statement->bindValue(":image", $image);
         $statement->bindValue(":date", $date);
     
         $statement->execute();

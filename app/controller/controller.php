@@ -10,6 +10,8 @@ $model = new model();
 
 // 投稿をデータベースに保存
 if($_SERVER["REQUEST_METHOD"] === "POST"){
+    echo "ok";
+
     $obj->dataService($_POST);
 }
 

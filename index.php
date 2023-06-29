@@ -44,10 +44,10 @@ if ($_SESSION["user_id"]) {
 
 <body class="relative contents">
     <div class="index-container">
-        <div class="nav-second" id="nav-second">
-            <p id="close" class="close absolute">×</p>
-            <!-- personal pageに遷移する -->
-            <?php if ($userId) {?>
+        <!-- <div class="nav-second" id="nav-second">
+            <p id="close" class="close absolute">×</p> -->
+        <!-- personal pageに遷移する -->
+        <!-- <?php if ($userId) {?>
             <form action="./app/controller/DetailController.php" method="post">
                 <input type="hidden" value="<?=$_SESSION["user_id"]?>" name="user_id">
                 <?php if ($userIcon) {?>
@@ -114,12 +114,101 @@ if ($_SESSION["user_id"]) {
                     </form>
                 </button>
                 <?php }?>
+            </div> -->
+
+
+
+        <!-- </div> -->
+        <div class="nav-second" id="nav-second">
+            <i class="fab fa-twitter"></i>
+            <div class="social-icon-container hover1">
+                <i class="fas fa-home"></i>
+                <p>Home</p>
+            </div>
+            <div class="social-icon-container hover2">
+                <i class="fas fa-search"></i>
+                <p>Explore</p>
+            </div>
+            <div class="social-icon-container hover3">
+                <i class="far fa-bell"></i>
+                <p>Notifications</p>
+            </div>
+            <div class="social-icon-container hover4">
+                <i class="far fa-envelope"></i>
+                <p>Messages</p>
+            </div>
+            <div class="social-icon-container hover5">
+                <i class="far fa-clipboard"></i>
+                <p>Lists</p>
+            </div>
+            <div class="social-icon-container hover6">
+                <i class="far fa-bookmark"></i>
+                <p>Bookmarks</p>
+            </div>
+            <div class="social-icon-container hover7">
+                <i class="far fa-bookmark"></i>
+                <p>Bookmarks</p>
+            </div>
+            <div class="social-icon-container hover8">
+                <i class="far fa-check-circle"></i>
+                <p>Verified</p>
+            </div>
+            <div class="social-icon-container hover9">
+                <i class="far fa-user"></i>
+                <p>Profile</p>
+            </div>
+            <div class="social-icon-container hover10">
+                <i class="far fa-circle"></i>
+                <p>More</p>
+            </div>
+            <div class="social-icon-container btn-bg">
+                <a href=""><button class="tweet-btn">Tweet</button></a>
             </div>
 
 
 
         </div>
         <main class="bg">
+            <div class="top fixed">
+                <h3>Home</h3>
+                <div class="select-btn-container">
+                    <div class="forYou ">
+                        <button class="choose-btn">For you</button>
+                    </div>
+                    <div class="following">
+                        <button class="choose-btn">Following</button>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container margin_t15">
+                <div class="top">
+                    <div class="home">
+                        <?php if ($userId) {?>
+                        <?php if ($userIcon) {?>
+                        <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon">
+                        <?php } else {?>
+                        <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                        <?php }?>
+                        <?php } else {?>
+                        <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                        <?php }?>
+                    </div>
+
+                    <form action="./app/controller/controller.php" method="post" enctype="multipart/form-data">
+                        <textarea type="text" name="body" class="body-input" placeholder="What is happening?!" rows="3"></textarea>
+                        <img id="displayImage" src="#" alt="your image" style="display:none;" class="your-img">
+                        <div class="tweet-btn-container">
+                            <div class="icon" id="icon-upload">
+                                <i class="far fa-image user"></i>
+                                <input type="file" name="image">
+                            </div>
+                            <button type="submit" class="tweet-btn2">Tweet</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
 
             <?php foreach ($postData as $post): ?>
             <div class="post-container" data-post-id="<?php echo $post["id"] ?>">
@@ -260,6 +349,43 @@ if ($_SESSION["user_id"]) {
                 });
         })
     });
+
+
+    const btns = document.querySelectorAll(".choose-btn");
+
+    var activeButton = null;
+    btns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            if (activeButton) {
+                activeButton.style.borderBottom = "";
+            }
+            var button = e.target;
+            button.style.borderBottom = "3px solid rgba(29,161, 242)"
+
+            activeButton = button;
+        })
+    })
+
+    // ユーザーが選択した画像をブラウザ上に表示させる
+    const upload = document.getElementById("icon-upload");
+
+    upload.addEventListener("change", (e) => {
+        // ユーザーのコンピュータ上のファイル（通常はユーザーがフォームを通じて選択したもの）を非同期に読み取る
+        var reader = new FileReader();
+
+        // FileReaderオブジェクトがファイルの読み込みを完了したときに発火する
+        reader.onload = (e) => {
+            dispayImage = document.getElementById("displayImage");
+            // データURLを返す（e.target.result）
+            console.log(e.target.result);
+            dispayImage.src = e.target.result;
+            dispayImage.style.display = "block";
+
+
+        }
+        // イベントオブジェクト e の target プロパティ（この場合、ファイルを選択する <input> 要素）の files プロパティを通じて選択されたファイルのリストにアクセスし、その中の最初のファイルを取り出している(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0]);
+    })
     </script>
 </body>
 
