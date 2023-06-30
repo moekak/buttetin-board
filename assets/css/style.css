@@ -213,6 +213,15 @@ main {
   background-color: white;
   border-radius: 30px;
 }
+.signUp-btn {
+  background-color: var(--blue);
+  width: 100%;
+  margin-top: 9%;
+  padding: 4% 0%;
+  color: white;
+  border-radius: 30px;
+  font-weight: 700;
+}
 .login-btn {
   color: white;
   font-weight: bold;
@@ -455,8 +464,16 @@ button {
 .close {
   top: 1%;
   right: 6%;
-  color: white;
+  color: black;
   font-size: 1.3rem;
+}
+.return1 {
+  position: absolute;
+  top: 3%;
+  right: 91%;
+  color: black;
+  font-size: 1.3rem;
+  font-weight: 900;
 }
 .logout {
   color: white;
@@ -519,6 +536,7 @@ button {
   margin-bottom: 4%;
   color: var(--blue);
 }
+
 .fa-image {
   font-size: 1.3rem;
 }
@@ -634,6 +652,7 @@ button {
 .your-img {
   width: 30%;
 }
+
 .top h3 {
   padding: 3%;
 }
@@ -1057,7 +1076,7 @@ select:focus {
   background-color: white;
   text-align: center;
 }
-#close {
+.close {
   position: absolute;
   top: 2%;
   left: 5%;
@@ -1173,10 +1192,17 @@ select:focus {
 .step1 h2 {
   margin-top: 5%;
   font-weight: 900;
-  margin-bottom: 7%;
+  margin-bottom: 5%;
   font-size: 1.8rem;
 }
 .input-name {
+  width: 100%;
+  margin-bottom: 4%;
+  padding: 3.5% 15% 3.5% 2%;
+  border: 1px solid rgba(0, 0, 0, 0.185);
+  border-radius: 7px;
+}
+.input-password {
   width: 100%;
   margin-bottom: 4%;
   padding: 3.5% 15% 3.5% 2%;
@@ -1193,7 +1219,13 @@ select:focus {
 .input-name:focus {
   outline: 2px solid var(--blue);
 }
+.input-password:focus {
+  outline: 2px solid var(--blue);
+}
 .input-phone:focus {
+  outline: 2px solid var(--blue);
+}
+.input-password:focus {
   outline: 2px solid var(--blue);
 }
 .input-name::placeholder {
@@ -1239,6 +1271,9 @@ select {
   margin-top: 7%;
   border-radius: 7px;
 }
+select:focus {
+  outline: 2px solid var(--blue);
+}
 .select-container {
   display: flex;
   align-content: center;
@@ -1273,20 +1308,174 @@ select {
   padding-top: 8%;
   display: none;
 }
-.count{
-  top: 9% ;
+.step-forth {
+  padding: 19%;
+  padding-top: 8%;
+  display: none;
+}
+.step-fifth {
+  padding: 19%;
+  padding-top: 8%;
+  display: none;
+}
+
+.count {
+  top: 9%;
   left: 89%;
   color: rgba(0, 0, 0, 0.651);
   font-size: 0.8rem;
   width: 10%;
 }
-.alert-phone{
+.alert-phone {
   font-size: 0.8rem;
   margin-bottom: 4%;
   margin-top: 1%;
   display: none;
   color: red;
 }
-.step-third{
+.alert-phone2 {
+  font-size: 0.8rem;
+  margin-bottom: 4%;
+  margin-top: 1%;
   display: none;
+  color: red;
+}
+.alert {
+  font-size: 0.8rem;
+  margin-top: 10%;
+}
+.step-third {
+  display: none;
+}
+.checked1 {
+  top: 3%;
+  left: 92%;
+  color: rgb(23, 139, 23);
+  display: none;
+}
+.checked2 {
+  top: 17.5%;
+  left: 92%;
+  color: rgb(23, 139, 23);
+  display: none;
+}
+.checked3 {
+  top: 32%;
+  left: 92%;
+  color: rgb(23, 139, 23);
+  display: none;
+}
+.close1 {
+  top: 3%;
+  left: 92%;
+  color: red;
+  display: none;
+}
+.close2 {
+  top: 17.5%;
+  left: 92%;
+  color: red;
+  display: none;
+}
+.close3 {
+  top: 32%;
+  left: 92%;
+  color: red;
+  display: none;
+}
+.password {
+  color: rgba(0, 0, 0, 0.377);
+  font-size: 0.9rem;
+  margin-bottom: 10%;
+}
+.next-btn {
+  background-color: rgba(0, 0, 0, 0.521);
+  width: 100%;
+  margin-top: 62%;
+  padding: 4% 0%;
+  color: white;
+  border-radius: 30px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.length-check {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+  gap: 2%;
+  margin-bottom: 0.5%;
+}
+
+.contain-lower {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+  gap: 2%;
+  margin-bottom: 0.5%;
+}
+.contain-num {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+  gap: 2%;
+  margin-bottom: 0.5%;
+}
+.contain-special {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+  gap: 2%;
+  margin-bottom: 0.5%;
+}
+.contain-upper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+  gap: 2%;
+  margin-bottom: 0.5%;
+}
+.icon{
+  display: inline-block;
+  position: relative;
+  width: 60%;
+}
+.icon input[type="file"]{
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+}
+.user{
+  width: 74%;
+  margin: 18% 0% 0% 42%;
+}
+.your-img2{
+  width: 74%;
+  margin: -74% 0% 0% 42%;
+  border-radius: 50%;
+}
+
+.two{
+  text-align: center;
+  width: 100%;
+}
+.next-btn2 {
+  background-color: rgba(0, 0, 0, 0.521);
+  width: 100%;
+  margin-top: 20%;
+  padding: 4% 0%;
+  color: white;
+  border-radius: 30px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.upload{
+  color: rgba(0, 0, 0, 0.596);
 }

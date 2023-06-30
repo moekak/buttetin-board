@@ -14,25 +14,25 @@ class SignupModel{
     }
 
     //emailの値を取り出す
-    public function getEmail($email){
-        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE  email = :email");
+    public function getPhone($phone){
+        $statement = $this->pdo->prepare("SELECT * FROM `user` WHERE  phone = :phone");
 
-        $statement->bindValue(':email', $email);
+        $statement->bindValue(':phone', $phone);
         $statement->execute();
 
         $this->userInfo = $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     // 登録されたユーザーをデーターベースに登録する
-    public function insertUserInfo($username, $email, $hashed_password, $icon, $date){
-        if($username && $email && $hashed_password){
+    public function insertUserInfo($username, $phone, $hashed_password, $date, $birthday){
+        if($username && $phone && $hashed_password){
         
             
-            $statement = $this->pdo->prepare("INSERT INTO `user` (`username`, `email`, `password`, `icon`, `created_at`) VALUES (:username, :email, :password, :icon, :created_at)");
+            $statement = $this->pdo->prepare("INSERT INTO `user` (`username`, `phone`, `password`, `icon`, `created_at`, `birthday`) VALUES (:username, :phone, :password, :icon, :created_at, :birthday)");
             $statement->bindValue(':username', $username);
-            $statement->bindValue(':email', $email);
+            $statement->bindValue(':email', $phone);
             $statement->bindValue(':password', $hashed_password);
-            $statement->bindValue(':icon', $icon);
+            $statement->bindValue(':birthday', $birthday);
             $statement->bindValue(':created_at', $date);
         
 

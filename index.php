@@ -1,11 +1,7 @@
 <?php
 require_once dirname(__FILE__) . "/app/controller/controller.php";
-require_once dirname(__FILE__) . "/session/app/function/signupFn.php";
-require_once dirname(__FILE__) . "/app/controller/likePost.php";
 require_once dirname(__FILE__) . "/app/service/postServiceFn.php";
 
-$signup = new signupFn();
-$like = new postService();
 
 $path = "./images/";
 

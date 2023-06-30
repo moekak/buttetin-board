@@ -1,10 +1,8 @@
 <?php
 require_once dirname(__FILE__) . "/app/controller/controller.php";
-require_once dirname(__FILE__) . "/session/app/function/signupFn.php";
 require_once dirname(__FILE__) . "/app/controller/likePost.php";
 require_once dirname(__FILE__) . "/app/service/postServiceFn.php";
 
-$signup = new signupFn();
 $like = new postService();
 
 $path = "./images/";
@@ -21,7 +19,7 @@ $userId = "";
 if ($_SESSION["user_id"]) {
     $userId = $_SESSION["user_id"];
 }
-
+// echo $_SESSION["user_id"];
 ?>
 
 
@@ -149,8 +147,8 @@ if ($_SESSION["user_id"]) {
         </div>
         <!-- サインアップ -->
         <div class="register-container" id="register">
-            <div id="close">×</div>
             <div class="step-first">
+                <div class="close">×</div>
 
                 <div class="top">
                     <i class="fab fa-twitter"></i>
@@ -193,6 +191,7 @@ if ($_SESSION["user_id"]) {
 
             <!-- step 2 -->
             <div class="stepNext">
+                <div class="close">×</div>
                 <div class="step1">
                     <h3>Step 1 of 5</h3>
                     <h2>Create your account</h2>
@@ -201,6 +200,8 @@ if ($_SESSION["user_id"]) {
                         <p class="count absolute"></p>
                         <input type="text" class="input-phone" name="phonenumber" placeholder="Phone">
                         <p class="alert-phone">Please enter a valid phone number.</p>
+                        <p class="alert-phone2">This number is already in use with other accounts. Please use another.
+                        </p>
                     </div>
                     <div class="date-of-birth">
                         <h4>Date of birth</h4>
@@ -210,18 +211,18 @@ if ($_SESSION["user_id"]) {
                         <div class="select-container">
                             <select name="month" id="month">
                                 <option selected disabled>Month</option>
-                                <option value="january">January</option>
-                                <option value="february">February</option>
-                                <option value="march">March</option>
-                                <option value="april">April</option>
-                                <option value="may">May</option>
-                                <option value="june">June</option>
-                                <option value="july">July</option>
-                                <option value="august">August</option>
-                                <option value="september">September</option>
-                                <option value="october">October</option>
-                                <option value="november">November</option>
-                                <option value="december">December</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
                             </select>
                             <select name="day" id="day">
                                 <option selected disabled>Day</option>
@@ -242,21 +243,91 @@ if ($_SESSION["user_id"]) {
             </div>
             <!-- step 3 -->
             <div class="step-third">
+                <div class="return1">←</div>
                 <div class="step1">
                     <h3>Step 2 of 5</h3>
                     <h2>Create your account</h2>
                     <div class="relative">
-                        <input type="text" class="input-name-check" name="useranme" placeholder="Name" maxlength="50">
-                        <p class="count absolute"></p>
+                        <!-- <form action="./session/app/controller/SignupController.php" method="post"> -->
+                        <input type="text" class="input-name-check" name="username" placeholder="Name" maxlength="50">
+                        <i class="fas fa-check-circle absolute checked1"></i>
+                        <i class="fas fa-times absolute close1"></i>
                         <input type="text" class="input-phone-check" name="phonenumber" placeholder="Phone">
-                        <input type="text" class="input-birthday-check" name="birthdaynumber" placeholder="Date of birth">
+                        <i class="fas fa-check-circle absolute checked2"></i>
+                        <i class="fas fa-times absolute close2"></i>
+                        <input type="text" class="input-birthday-check" name="birthday" placeholder="Date of birth">
+                        <i class="fas fa-check-circle absolute checked3"></i>
+                        <i class="fas fa-times absolute close3"></i>
+                        <p class="alert">By signing up, you agree to the <a href="">Terms of Service</a> and <a
+                                href="">Privacy
+                                Policy</a>, including <a href="">Cookie Use</a>. Twitter
+                            may use your contact information, including your email address and phone number for
+                            purposes
+                            outlined in our Privacy Policy, like keeping your account secure and personalizing our
+                            services,
+                            including ads. <a href="">Learn more.</a> Others will be able to find you by email or
+                            phone number,
+                            when provided,
+                            unless you choose otherwise <a href="">here</a>.</p>
+                        <button class="signUp-btn" type="submit">Sign up</button>
+                        <!-- </form> -->
                     </div>
-                    
                 </div>
+            </div>
+            <!-- step4 -->
+            <div class="step-forth">
+                <div class="step1">
+                    <h3>Step 3 of 5</h3>
+                    <h2>Create your password</h2>
+                    <div class="relative">
+                        <!-- <form action="./session/app/controller/SignupController.php" method="post"> -->
+                        <input type="password" class="input-password" name="username" placeholder="password"
+                            maxlength="30">
+                        <div class="length-check">
+                            <i class="fas fa-check"></i>
+                            <p>at least 8 characters long</p>
+                        </div>
+                        <div class="contain-lower">
+                            <i class="fas fa-check"></i>
+                            <p>at least one lowercase letter</p>
+                        </div>
+                        <div class="contain-upper">
+                            <i class="fas fa-check"></i>
+                            <p>at least one uppercase letter</p>
+                        </div>
+                        <div class="contain-num">
+                            <i class="fas fa-check"></i>
+                            <p>at least one number</p>
+                        </div>
+                        <div class="contain-special">
+                            <i class="fas fa-check"></i>
+                            <p>at least one special character</p>
+                        </div>
+                        <button class="next-btn" type="submit">Sign up</button>
+                    </div>
+                </div>
+            </div>
+            <!-- icon -->
+            <div class="step-fifth">
+                <div class="step1">
+                    <i class="fab fa-twitter two"></i>
+                    <h2>Choose profile picture</h2>
+                    <p class="upload">Let's upload your favorite picture</p>
+                    <div class="relative">
+                        <form action="./session/app/controller/SignupController.php" method= "post" enctype="multipart/form-data">
+                            <div class="icon">
+                                <img src="./assets/img/user-dummy.png" alt="" class="user">
+                                <input type="file" name="icon" id="icon-btn">
+                                <img id="displayImage2" src="#" alt="your image" style="display:none;"
+                                    class="your-img2">
+                            </div>
+                            <button class="next-btn2" type="submit" name="submit">later</button>
+                        </form>
 
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
     <script src="./js/main.js"></script>
@@ -342,22 +413,28 @@ if ($_SESSION["user_id"]) {
     const register = document.getElementById("register");
     const signBtn = document.getElementById("sign-btn");
     const bg = document.querySelector(".bg-gray");
-    const close = document.getElementById("close");
+    const closes = document.querySelectorAll(".close");
 
     signBtn.addEventListener("click", () => {
         register.style.display = "block"
         bg.style.display = "block"
 
     })
-    close.addEventListener("click", () => {
-        register.style.display = "none"
-        bg.style.display = "none"
+
+    closes.forEach((close) => {
+        close.addEventListener("click", () => {
+            register.style.display = "none"
+            bg.style.display = "none"
+        })
+
     })
 
     const create = document.getElementById("create-btn");
     const step1 = document.querySelector(".step-first")
     const step2 = document.querySelector(".stepNext")
     const step3 = document.querySelector(".step-third");
+    const step4 = document.querySelector(".step-forth");
+    const step5 = document.querySelector(".step-fifth");
 
     create.addEventListener("click", () => {
         step1.style.display = "none"
@@ -366,6 +443,8 @@ if ($_SESSION["user_id"]) {
     })
 
     // validation check (step 1 of 5)
+    const password = document.querySelector(".input-password");
+    const next = document.querySelector(".next-btn");
     const name = document.querySelector(".input-name");
     const phone = document.querySelector(".input-phone");
     const year = document.getElementById("year");
@@ -373,21 +452,33 @@ if ($_SESSION["user_id"]) {
     const day = document.getElementById("day");
     const nextBtn = document.querySelector(".next")
 
+    const inputName = document.querySelector(".input-name-check")
+    const inputPhone = document.querySelector(".input-phone-check")
+    const inputBirthday = document.querySelector(".input-birthday-check");
+
+    const signup = document.querySelector(".signUp-btn");
 
 
+    let nameValue = ""
+    let phoneValue = "";
+    let yearValue = "";
+    let monthValue = "";
+    let dayValue = "";
+    let passwordValue = "";
+    const alertPhone = document.querySelector(".alert-phone");
 
-    document.addEventListener("input", () => {
-        const nameValue = name.value;
-        const phoneValue = phone.value;
-        const yearValue = year.value;
-        const monthValue = month.value;
-        const dayValue = day.value;
-        console.log(monthValue);
+    document.addEventListener("input", (e) => {
+        nameValue = name.value;
+        phoneValue = phone.value;
+        yearValue = year.value;
+        monthValue = month.value;
+        dayValue = day.value;
+
 
 
         // 電話番号のvalidation check
         const phoneRegex = /^\d{10,11}$/;
-        const alertPhone = document.querySelector(".alert-phone");
+
         phone.addEventListener("input", () => {
             if (phoneRegex.test(phoneValue)) {
                 alertPhone.style.display = "none";
@@ -411,45 +502,215 @@ if ($_SESSION["user_id"]) {
             nextBtn.style.backgroundColor = "rgba(0, 0, 0, 0.637)";
         }
 
+
+
+        const check1 = document.querySelector(".checked1")
+        const check2 = document.querySelector(".checked2")
+        const check3 = document.querySelector(".checked3")
+
+        const close1 = document.querySelector(".close1")
+        const close2 = document.querySelector(".close2")
+        const close3 = document.querySelector(".close3")
+
         // ボタン押されたらとりあえずlocalstrageに保存する
         nextBtn.addEventListener("click", () => {
-            localStorage.setItem("name", nameValue)
-            localStorage.setItem("phone", phoneValue)
-            localStorage.setItem("month", monthValue)
-            localStorage.setItem("day", dayValue);
-            localStorage.setItem("year", yearValue);
 
             step2.style.display = "none";
             step3.style.display = "block";
+
+            if (nameValue) {
+                inputName.value = nameValue;
+                check1.style.display = "block";
+                close1.style.display = "none";
+            } else {
+                inputName.value = "";
+                check1.style.display = "none";
+                close1.style.display = "block";
+            }
+            if (phoneValue) {
+                inputPhone.value = phoneValue;
+                check2.style.display = "block";
+                close2.style.display = "none";
+            } else {
+                inputPhone.value = "";
+                check2.style.display = "none";
+                close2.style.display = "block";
+            }
+            if (dayValue && monthValue && yearValue) {
+                const date = monthValue + " " + dayValue + "," + yearValue;
+                inputBirthday.value = date;
+                check3.style.display = "block";
+                close3.style.display = "none";
+            } else {
+                inputBirthday.value = "";
+                check3.style.display = "none";
+                close3.style.display = "block";
+            }
         })
         //   カウント数える nameinputの
         const countNum = document.querySelector(".count");
         countNum.innerHTML = nameValue.length + "/ 50";
-        // if(nameValue.length == 0){
-        //     name.style.border = "2px solid red";
 
-        // }
+        // パスワードチェック
 
+
+        passwordValue = password.value;
+
+
+        const pattern1 = /.{8,}/;
+        // 小文字が含まれているか
+        const pattern2 = /[a-z]/;
+        // 一つ以上の数字が含まれているか
+        const pattern3 = /[0-9]/;
+        // 一つ以上の記号が含まれているか
+        const pattern4 = /[^a-zA-Z\d]/;
+        // 大文字が含まれているか
+        const pattern5 = /[A-Z]/;
+
+        if (pattern1.test(passwordValue)) {
+            length.style.color = "green"
+        } else {
+            length.style.color = "red";
+        }
+        if (pattern2.test(passwordValue)) {
+            lower.style.color = "green"
+        } else {
+            lower.style.color = "red";
+        }
+        if (pattern3.test(passwordValue)) {
+            num.style.color = "green"
+        } else {
+            num.style.color = "red";
+        }
+        if (pattern4.test(passwordValue)) {
+            special.style.color = "green"
+        } else {
+            special.style.color = "red";
+        }
+        if (pattern5.test(passwordValue)) {
+            upper.style.color = "green"
+        } else {
+            upper.style.color = "red";
+        }
+
+        if (pattern5.test(passwordValue) && pattern4.test(passwordValue) && pattern3.test(
+                passwordValue) &&
+            pattern2.test(passwordValue) && pattern1.test(passwordValue)) {
+            next.style.pointerEvents = "auto";
+            next.style.backgroundColor = "var(--blue)"
+        } else {
+            next.style.pointerEvents = "none";
+            next.style.backgroundColor = " rgba(0, 0, 0, 0.521)"
+        }
+
+        // fetch api
+
+
+
+    })
+    next.addEventListener("click", () => {
+
+        const data = [nameValue, phoneValue, monthValue + " " + dayValue + "," + yearValue,
+            passwordValue
+        ];
+
+
+
+        fetch("./session/app/signUpApi.php", {
+
+                // 第1引数に送り先
+                method: "POST", // メソッド指定
+                headers: {
+                    "Content-Type": "application/json"
+                }, // jsonを指定
+
+                body: JSON.stringify(data), // json形式に変換して添付
+            })
+            .then((response) => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
+            .then((res) => {
+                console.log(res); // やりたい処理
+                if (res == "error") {
+                    step4.style.display = "none";
+                    step2.style.display = "block";
+                    document.querySelector(".alert-phone2").style.display = "block";
+                    phone.style.border = "2px solid red"
+                    alertPhone.style.display = "none";
+                }
+            })
+            .catch((error) => {
+                step4.style.display = "none";
+                step5.style.display = "block"
+                alertPhone.style.display = "none";
+            });
+    })
+
+    // ＝＝＝＝＝＝＝＝＝＝＝＝End＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
+    // })
+    const return1 = document.querySelector(".return1");
+
+    return1.addEventListener("click", () => {
+        step3.style.display = "none";
+        step2.style.display = "block";
+    })
+
+    inputName.addEventListener("focus", () => {
+        step3.style.display = "none";
+        step2.style.display = "block";
+        name.focus();
+    })
+    inputPhone.addEventListener("focus", () => {
+        step3.style.display = "none";
+        step2.style.display = "block";
+        phone.focus();
+    })
+    inputBirthday.addEventListener("focus", () => {
+        step3.style.display = "none";
+        step2.style.display = "block";
+        month.focus();
+    })
+
+    signup.addEventListener("click", () => {
+        step3.style.display = "none";
+        step4.style.display = "block"
     })
 
 
-    // データをlocalstrageから取り出す
-    const getNameData = localStorage.getItem("name")
-    const getPhoneData = localStorage.getItem("phone")
-    const getMonthData = localStorage.getItem("month")
-    const getDayData = localStorage.getItem("day")
-    const getYearData = localStorage.getItem("year")
 
-    const inputName = document.querySelector(".input-name-check")
-    const inputPhone = document.querySelector(".input-phone-check")
-    const inputBirthday = document.querySelector(".input-birthday-check")
 
-    if(getNameData){
-        inputName.value = getNameData;
-    }
-    if(getPhoneData){
-        inputPhone.value = getPhoneData;
-    }
+
+    const length = document.querySelector(".length-check");
+    const lower = document.querySelector(".contain-lower");
+    const upper = document.querySelector(".contain-upper");
+    const num = document.querySelector(".contain-num");
+    const special = document.querySelector(".contain-special");
+    const btn2 = document.querySelector(".next-btn2")
+
+
+    const upload = document.getElementById("icon-btn");
+
+    upload.addEventListener("change", (e) => {
+        // ユーザーのコンピュータ上のファイル（通常はユーザーがフォームを通じて選択したもの）を非同期に読み取る
+        var reader = new FileReader();
+
+        // FileReaderオブジェクトがファイルの読み込みを完了したときに発火する
+        reader.onload = (e) => {
+            dispayImage = document.getElementById("displayImage2");
+            // データURLを返す（e.target.result）
+            console.log(e.target.result);
+            dispayImage.src = e.target.result;
+            dispayImage.style.display = "block";
+            btn2.innerHTML = "upload";
+            btn2.style.backgroundColor = "var(--blue)"
+            btn2.style.pointerEvents = "auto";
+
+
+
+        }
+        // イベントオブジェクト e の target プロパティ（この場合、ファイルを選択する <input> 要素）の files プロパティを通じて選択されたファイルのリストにアクセスし、その中の最初のファイルを取り出している(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0]);
+    })
     </script>
 </body>
 
