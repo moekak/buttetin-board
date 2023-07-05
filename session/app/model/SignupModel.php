@@ -24,24 +24,18 @@ class SignupModel{
     }
 
     // 登録されたユーザーをデーターベースに登録する
-    public function insertUserInfo($username, $phone, $hashed_password, $date, $birthday){
-        if($username && $phone && $hashed_password){
+    public function insertUserInfo($icon, $user_id){
+        if($icon){
         
             
-            $statement = $this->pdo->prepare("INSERT INTO `user` (`username`, `phone`, `password`, `icon`, `created_at`, `birthday`) VALUES (:username, :phone, :password, :icon, :created_at, :birthday)");
-            $statement->bindValue(':username', $username);
-            $statement->bindValue(':email', $phone);
-            $statement->bindValue(':password', $hashed_password);
-            $statement->bindValue(':birthday', $birthday);
-            $statement->bindValue(':created_at', $date);
+            $statement = $this->pdo->prepare("UPDATE `user` SET `icon` = :icon  WHERE id = :id");
+            $statement->bindValue(':icon', $icon);
+            $statement->bindValue(':id', $user_id);
+
         
 
             $statement->execute();
 
-            $user_id = $this->pdo->lastInsertId();
-
-            session_start();
-            $_SESSION["user_id"] = $user_id;
 
         } 
     

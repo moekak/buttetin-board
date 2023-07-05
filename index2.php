@@ -11,14 +11,14 @@ $path = "./images/";
 $post = $_SESSION["postData"];
 
 // $counts = $_SESSION["likesCount"];
-$userName = $_SESSION["username"];
-$userEmail = $_SESSION["email"];
-$userIcon = $_SESSION["icon"];
+// $userName = $_SESSION["username"];
+// $userEmail = $_SESSION["email"];
+// $userIcon = $_SESSION["icon"];
 
-$userId = "";
-if ($_SESSION["user_id"]) {
-    $userId = $_SESSION["user_id"];
-}
+// $userId = "";
+// if ($_SESSION["user_id"]) {
+//     $userId = $_SESSION["user_id"];
+// }
 // echo $_SESSION["user_id"];
 ?>
 
@@ -149,7 +149,6 @@ if ($_SESSION["user_id"]) {
         <div class="register-container" id="register">
             <div class="step-first">
                 <div class="close">×</div>
-
                 <div class="top">
                     <i class="fab fa-twitter"></i>
                     <h2>Join Twitter today</h2>
@@ -303,20 +302,26 @@ if ($_SESSION["user_id"]) {
                             <i class="fas fa-check"></i>
                             <p>at least one special character</p>
                         </div>
-                        <button class="next-btn" type="submit">Sign up</button>
+                        <a href="#five" onclick="location.reload();"><button class="next-btn"
+                                type="submit">Submit</button></a>
                     </div>
                 </div>
             </div>
             <!-- icon -->
-            <div class="step-fifth">
+
+        </div>
+        <div class="icon-container-signup ">
+            <div class="step-fifth" id="five">
                 <div class="step1">
                     <i class="fab fa-twitter two"></i>
+                    <?=$_SESSION["user_id"]?>
                     <h2>Choose profile picture</h2>
                     <p class="upload">Let's upload your favorite picture</p>
                     <div class="relative">
-                        <form action="./session/app/controller/SignupController.php" method= "post" enctype="multipart/form-data">
+                        <form action="./session/app/controller/SignupController.php" method="post"
+                            enctype="multipart/form-data">
                             <div class="icon">
-                                <img src="./assets/img/user-dummy.png" alt="" class="user">
+                                <img src="./assets/img/user-dummy.png" alt="" class="user-dummy">
                                 <input type="file" name="icon" id="icon-btn">
                                 <img id="displayImage2" src="#" alt="your image" style="display:none;"
                                     class="your-img2">
@@ -327,6 +332,73 @@ if ($_SESSION["user_id"]) {
                     </div>
                 </div>
             </div>
+        </div>
+        <!-- ================== sign in page ================ -->
+        <div class="signIn-container relative" id="sign-in">
+            <div class="step-first signIn">
+                <div class="close">×</div>
+                <div class="top">
+                    <i class="fab fa-twitter"></i>
+                    <h2>Sign in to Twitter</h2>
+                </div>
+                <div class="google">
+                    <button>
+                        <div class="icon-left">
+                            <img src="./assets/img/user-dummy.png" alt="" class="user-icon4">
+                        </div>
+                        <div class="right-name">
+                            <p>Sign in as moeka</p>
+                        </div>
+                        <div class="google-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </button>
+                </div>
+                <div class="apple">
+                    <button>
+                        <div class="icon-left">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <div class="right-name apple-text">
+                            <p>Sign in with Apple</p>
+                        </div>
+                    </button>
+                </div>
+                <div class="border"><span>――――――――</span> or <span>――――――――</span></div>
+                <div class="input-signIn">
+                    <input type="text" placeholder="Phone, email, or username" id="signIn">
+                </div>
+                <div class="create-account">
+                    <button id="signin-btn">Next</button>
+                </div>
+                <div class="signin-ask">
+                    <p>Don't have an account? <a href="">Sign up</a></p>
+                </div>
+            </div>
+            <div class="error-container absolute">
+                <p class="error-text">Sorry, we could not find your account.</p>
+            </div>
+            
+            <div class="step-first signIn-password">
+                <div class="close">×</div>
+                <div class="top">
+                    <i class="fab fa-twitter"></i>
+                    <h2>Enter your password</h2>
+                </div>
+                <div class="input-read">
+                    <input type="text" readonly id="phone-read">
+                </div>
+                <div class="input-signIn">
+                    <input type="password" placeholder="Password" id="pass">
+                </div>
+                <div class="create-account" id="check-btn">
+                    <button id="signin-check">Next</button>
+                </div>
+                <div class="signin-ask">
+                    <p>Don't have an account? <a href="">Sign up</a></p>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -435,6 +507,14 @@ if ($_SESSION["user_id"]) {
     const step3 = document.querySelector(".step-third");
     const step4 = document.querySelector(".step-forth");
     const step5 = document.querySelector(".step-fifth");
+    const iconContainer = document.querySelector(".icon-container-signup")
+
+    if (localStorage.getItem("loaded")) {
+        console.log("1234");
+        iconContainer.style.display = "block"
+        step5.style.display = "block";
+        bg.style.display = "block"
+    }
 
     create.addEventListener("click", () => {
         step1.style.display = "none"
@@ -608,8 +688,11 @@ if ($_SESSION["user_id"]) {
 
 
     })
-    next.addEventListener("click", () => {
 
+
+    next.addEventListener("click", () => {
+        localStorage.setItem("loaded", "loaded")
+        step5.style.display = "block";
         const data = [nameValue, phoneValue, monthValue + " " + dayValue + "," + yearValue,
             passwordValue
         ];
@@ -689,6 +772,9 @@ if ($_SESSION["user_id"]) {
 
 
     const upload = document.getElementById("icon-btn");
+    btn2.addEventListener("click", () => {
+        localStorage.removeItem("loaded")
+    })
 
     upload.addEventListener("change", (e) => {
         // ユーザーのコンピュータ上のファイル（通常はユーザーがフォームを通じて選択したもの）を非同期に読み取る
@@ -704,12 +790,98 @@ if ($_SESSION["user_id"]) {
             btn2.innerHTML = "upload";
             btn2.style.backgroundColor = "var(--blue)"
             btn2.style.pointerEvents = "auto";
-
-
-
         }
         // イベントオブジェクト e の target プロパティ（この場合、ファイルを選択する <input> 要素）の files プロパティを通じて選択されたファイルのリストにアクセスし、その中の最初のファイルを取り出している(e.target.files[0])
         reader.readAsDataURL(e.target.files[0]);
+    })
+
+
+
+    // sign in の処理
+    const signInBtn = document.getElementById("signin-btn");
+    const signInInput = document.getElementById("signIn");
+    const firstStep = document.querySelector(".signIn")
+    const signInPassword = document.querySelector(".signIn-password");
+    const signin = document.getElementById("sign-in");
+    const loginBtn = document.querySelector(".login-btn");
+    const pass = document.getElementById("pass");
+    const read = document.getElementById("phone-read")
+    const signinCheck = document.getElementById("check-btn")
+    const errorText = document.querySelector(".error-container")
+
+    loginBtn.addEventListener("click", () => {
+        signin.style.display = "block";
+        bg.style.display = "block"
+    })
+
+    let signinValue = "";
+
+    signInInput.addEventListener("input", (e) => {
+        signinValue = e.target.value;
+    })
+
+    signInBtn.addEventListener("click", () => {
+        fetch("./session/app/logInApi.php", {
+
+                // 第1引数に送り先
+                method: "POST", // メソッド指定
+                headers: {
+                    "Content-Type": "application/json"
+                }, // jsonを指定
+
+                body: JSON.stringify(signinValue), // json形式に変換して添付
+            })
+            .then((response) => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
+            .then((res) => {
+                console.log(res); // やりたい処理
+                if (!(res == "error")) {
+                    errorText.style.display = "none"
+                    firstStep.style.display = "none";
+                    signInPassword.style.display = "block"
+                    read.value = res;
+                    let password = "";
+                    pass.addEventListener("input", (e) => {
+                        password = e.target.value
+                    })
+                    signinCheck.addEventListener("click", () => {
+
+                        const data = [signinValue, password]
+                        fetch("./session/app/passwordCheckApi.php", {
+
+                                // 第1引数に送り先
+                                method: "POST", // メソッド指定
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }, // jsonを指定
+
+                                body: JSON.stringify(data), // json形式に変換して添付
+                            })
+                            .then((response) => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
+                            .then((res) => {
+                                console.log(res);
+                                if(res == "success"){
+                                    errorText.style.display = "none"
+                                    window.location.replace("./index.php")
+                                } else{
+                                    errorText.firstElementChild.innerHTML = "wrong password!"
+                                    errorText.style.display = "block"
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    })
+
+
+                } else {
+                    errorText.style.display = "block"
+
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
     })
     </script>
 </body>

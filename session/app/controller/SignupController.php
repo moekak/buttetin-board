@@ -1,7 +1,10 @@
 <?php
- print_r($_FILES["icon"]);
-if($_POST["submit"]){
+require_once(dirname(__FILE__) . "../../function/signupFn.php");
+
+$function = new signupFn();
+
+
+$function->insertIcon();
   
        
     
-}

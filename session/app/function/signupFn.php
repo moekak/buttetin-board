@@ -87,16 +87,23 @@ require_once dirname(__FILE__) . "/../../../app/service/changeStyleFn.php";
 
 // }
 
-
+session_start();
 
 class signupFn
 {
     public $icon;
+    public $filename;
+    public $obj;
+    public $imagePath;
+    public $model;
+    
+
 
    
     public function __construct()
     {
-        // $this->obj = new Validation();
+        $this->obj = new Validation();
+        $this->model = new SignupModel();
         // $this->style = new changeStyle();
 
     }
@@ -104,6 +111,8 @@ class signupFn
     public function checkData(){
         if($_FILES["icon"]){
             $this->icon = $_FILES["icon"];
+        } else{
+            header("Location: ../../../index2.php" );
         }
         if($this->icon && $this->icon["tmp_name"]){
             if (!file_exists("../../images2")) {
@@ -115,7 +124,19 @@ class signupFn
 
             mkdir(dirname($this->imagePath . $this->filename));
             move_uploaded_file($this->icon["tmp_name"], $this->imagePath . $this->filename);
+        } else{
+            header("Location: ../../../index.php" );
         }
+    }
+
+    public function insertIcon(){
+      
+        $this->checkData();
+        if($_SESSION["user_id"] && $this->icon){
+            $this->model->insertUserInfo($this->filename, $_SESSION["user_id"]);
+            $_SESSION["icon"] = $this->filename;
+            header("Location: ../../../index.php" );
+        } 
     }
 
 

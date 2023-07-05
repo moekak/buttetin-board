@@ -2,21 +2,23 @@
 require_once dirname(__FILE__) . "/app/controller/controller.php";
 require_once dirname(__FILE__) . "/app/service/postServiceFn.php";
 
-
 $path = "./images/";
+$path2 = "./images2/";
 
 // echo $_SESSION["user_id"];
 $post = $_SESSION["postData"];
 
 // $counts = $_SESSION["likesCount"];
-$userName = $_SESSION["username"];
-$userEmail = $_SESSION["email"];
+// $userName = $_SESSION["username"];
+// $userEmail = $_SESSION["email"];
 $userIcon = $_SESSION["icon"];
 
 $userId = "";
 if ($_SESSION["user_id"]) {
     $userId = $_SESSION["user_id"];
 }
+
+// echo $_SESSION["name"]
 
 ?>
 
@@ -191,7 +193,8 @@ if ($_SESSION["user_id"]) {
                     </div>
 
                     <form action="./app/controller/controller.php" method="post" enctype="multipart/form-data">
-                        <textarea type="text" name="body" class="body-input" placeholder="What is happening?!" rows="3"></textarea>
+                        <textarea type="text" name="body" class="body-input" placeholder="What is happening?!"
+                            rows="3"></textarea>
                         <img id="displayImage" src="#" alt="your image" style="display:none;" class="your-img">
                         <div class="tweet-btn-container">
                             <div class="icon" id="icon-upload">
@@ -216,14 +219,23 @@ if ($_SESSION["user_id"]) {
                     </form>
                     <div class="post-comment-container border_none">
                         <div class="flex-left gap3">
+
                             <div class="icon-containerDetail">
+                                <?php if ($post["icon"]) {?>
                                 <img src="<?php echo $path . $post["icon"] ?>" alt="" class="avatar">
+                                <?php } else {?>
+                                <img src="./assets/img/user-dummy.png" alt="" class="avatar">
+                                <?php }?>
                             </div>
                             <div class="textDetail-container">
-                                <p class="bold"><?=$post["username"]?></p>
-                                <p><?=$post["body"]?></p>
-
+                                <p class="bold"><?php echo $post["name"] ?></p>
+                                <p class="tweet-body"><?=$post["body"]?></p>
                             </div>
+                        </div>
+                        <div class="image-container">
+                            <?php if ($post["image"]) {?>
+                            <img src="<?php echo $path2 . $post["image"] ?>" alt="" class="your-img">
+                            <?php }?>
                         </div>
 
                         <div class="comment-section">
@@ -263,7 +275,7 @@ if ($_SESSION["user_id"]) {
 
                         </div>
                     </div>
-                    <div class="comment_container">
+                    <!-- <div class="comment_container">
                         <?php if ($userIcon) {?>
                         <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon2">
                         <?php } else {?>
@@ -275,13 +287,45 @@ if ($_SESSION["user_id"]) {
                             <input type="text" name="comment" class="comment-input" placeholder="Tweet your reply!">
                             <input type="submit" name="reply-btn" class="reply" value="reply">
                         </form>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
             <?php endforeach;?>
 
         </main>
+    </div>
+    <div class="modal-post absolute">
+        <div class="close-tweet">×</div>
+        <div class="top">
+            <div class="home">
+                <?php if ($userId) {?>
+                <?php if ($userIcon) {?>
+                <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon">
+                <?php } else {?>
+                <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                <?php }?>
+                <?php } else {?>
+                <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                <?php }?>
+            </div>
+
+            <form action="./app/controller/controller.php" method="post" enctype="multipart/form-data" class="tweet-form">
+                <textarea type="text" name="body" class="body-input2" placeholder="What is happening?!"
+                    rows="3"></textarea>
+                <img id="displayImage" src="#" alt="your image" style="display:none;" class="your-img">
+                <div class="tweet-btn-container">
+                    <div class="icon" id="icon-upload">
+                        <i class="far fa-image user"></i>
+                        <input type="file" name="image">
+                    </div>
+                    <button type="submit" class="tweet-btn2">Tweet</button>
+                </div>
+
+            </form>
+        </div>
+
+
     </div>
 
     <script src="./js/main.js"></script>

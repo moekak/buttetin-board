@@ -41,6 +41,8 @@ if (!$userInfo) {
 
     session_start();
     $_SESSION["user_id"] = $user_id;
+    $_SESSION["name"] = $name;
+    $_SESSION["birthday"] = $birthday;
 
 } else{
     echo json_encode($check); 

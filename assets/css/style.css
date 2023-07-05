@@ -95,10 +95,10 @@ nav {
 main {
   border-left: 1px solid rgba(0, 0, 0, 0.096);
   border-right: 1px solid rgba(0, 0, 0, 0.096);
-  margin-left: 28.6%;
+  margin-left: 24.6%;
 }
 .main {
-  width: 60%;
+  width: 40%;
 }
 .tweet-btn-container {
   width: 100%;
@@ -107,11 +107,12 @@ main {
   justify-content: space-between;
 }
 .post-container .top {
-  padding-top: 2%;
-  padding-left: 2%;
+  padding-top: 3%;
+  padding-left: 3%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.068);
 }
 .post-container form {
   margin-left: 2%;
@@ -166,6 +167,7 @@ main {
 }
 .left {
   border-bottom: 1px solid rgba(0, 0, 0, 0.068);
+  padding: 3%;
 }
 .left2 {
   padding: 4% 3%;
@@ -197,6 +199,10 @@ main {
 }
 .login-ask {
   text-align: center;
+}
+.signin-ask {
+  text-align: center;
+  margin-top: 7%;
 }
 .login-btn {
   border: 1px solid white;
@@ -516,6 +522,7 @@ button {
   color: black;
   padding-left: 3%;
   padding-right: 3%;
+  border-right: 1px solid rgba(0, 0, 0, 0.178);
 }
 .icon {
   display: inline-block;
@@ -638,13 +645,15 @@ button {
   /* position: fixed;
   z-index: 555; */
 }
+
 .fixed {
   position: fixed;
   top: 0;
-  width: 42.8%;
-  left: 37.17%;
+  width: 44.8%;
+  left: 35.17%;
   z-index: 999;
   background-color: rgba(255, 255, 255, 0.938);
+  border-right: 1px solid rgba(0, 0, 0, 0.11);
 }
 .margin_t15 {
   margin-top: 15%;
@@ -746,6 +755,8 @@ button {
 .index-container {
   width: 60%;
   padding-bottom: 8%;
+  min-height: 100vh;
+  border-right: 1px solid rgba(0, 0, 0, 0.13);
 }
 .dummy-detail {
   width: 35px;
@@ -1012,6 +1023,7 @@ button {
 .post-container2 {
   width: 75%;
 }
+
 .introdution {
   width: 90%;
   margin-top: 2%;
@@ -1071,8 +1083,41 @@ select:focus {
   padding-top: 1%;
   border-radius: 15px;
 }
+.signIn-container {
+  position: fixed;
+  background: white;
+  top: 11%;
+  left: 37%;
+  z-index: 999;
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 67vh;
+  padding-top: 1%;
+  border-radius: 15px;
+}
+.icon-container-signup {
+  position: fixed;
+  background: white;
+  top: 11%;
+  left: 37%;
+  z-index: 999;
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 67vh;
+  padding-top: 1%;
+  border-radius: 15px;
+  display: none;
+}
 
 .register-container .top {
+  background-color: white;
+  text-align: center;
+}
+.signIn-container .top {
   background-color: white;
   text-align: center;
 }
@@ -1083,7 +1128,7 @@ select:focus {
   font-size: 2rem;
   font-weight: bold;
 }
-.register-container .top h2 {
+.signIn-container .top h2 {
   font-weight: bolder;
 }
 .google button {
@@ -1177,7 +1222,7 @@ select:focus {
 .register-container2 {
   padding: 6%;
   position: fixed;
-  background: whitesmoke;
+  background: white;
   top: 11%;
   left: 50%;
   z-index: 999;
@@ -1439,12 +1484,12 @@ select:focus {
   gap: 2%;
   margin-bottom: 0.5%;
 }
-.icon{
+.icon {
   display: inline-block;
   position: relative;
   width: 60%;
 }
-.icon input[type="file"]{
+.icon input[type="file"] {
   height: 100%;
   left: 0;
   top: 0;
@@ -1452,17 +1497,17 @@ select:focus {
   position: absolute;
   width: 100%;
 }
-.user{
+.user-dummy {
   width: 74%;
   margin: 18% 0% 0% 42%;
 }
-.your-img2{
+.your-img2 {
   width: 74%;
   margin: -74% 0% 0% 42%;
   border-radius: 50%;
 }
 
-.two{
+.two {
   text-align: center;
   width: 100%;
 }
@@ -1474,8 +1519,114 @@ select:focus {
   color: white;
   border-radius: 30px;
   font-weight: 700;
-  pointer-events: none;
 }
-.upload{
+.upload {
   color: rgba(0, 0, 0, 0.596);
+}
+/* sign in */
+.input-signIn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3%;
+}
+.input-signIn input {
+  width: 60%;
+  padding: 2%;
+  border: 1px solid rgba(0, 0, 0, 0.295);
+  border-radius: 5px;
+  background-color: transparent;
+}
+.input-read {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 11%;
+}
+.input-read input {
+  width: 60%;
+  padding: 2%;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(128, 128, 128, 0.089);
+}
+.input-read input:focus {
+  outline: none;
+}
+.signIn {
+  width: 100%;
+}
+.signIn-password {
+  width: 100%;
+  display: none;
+}
+#check-btn {
+  margin-top: 35%;
+}
+#sign-in {
+  display: none;
+}
+.error-text {
+  color: white;
+  background-color: var(--blue);
+  padding: 2% 3%;
+  text-align: center;
+}
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  bottom: -4%;
+  border-radius: 5px;
+  display: none;
+}
+.image-container {
+  padding: 2% 3%;
+}
+.tweet-body {
+  padding-top: 1.5%;
+}
+.modal-post {
+  background-color: pink;
+  width: 40%;
+  top: 5%;
+  right: 50%;
+  z-index: 999;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+}
+.modal-post .top {
+  padding-top: 3%;
+  padding-left: 3%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.068);
+  background-color: pink;
+  width: 100%;
+  gap: 2%;
+}
+.body-input2 {
+  width: 100%;
+  height: 30%;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.body-input2:focus {
+  outline: none;
+}
+.body-input2::placeholder {
+  color: rgba(0, 0, 0, 0.541);
+  font-size: 1.4rem;
+}
+.tweet-form {
+  width: 100%;
+  padding-right: 3%;
 }
