@@ -57,7 +57,7 @@ if(isset($_SESSION["user_id"])){
 $statement = $pdo->prepare("SELECT `likes_count` from `board-table` WHERE id = :id");
 $statement->bindValue(":id", $res);
 $statement->execute();
-$likeCount = $statement->fetchAll(PDO::FETCH_ASSOC);
+$likeCount = $statement->fetchColumn();
 
 $_SESSION["likesCount"] = $likeCount;
 

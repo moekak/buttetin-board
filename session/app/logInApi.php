@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 $raw = file_get_contents('php://input'); // POSTされた生のデータを受け取る
 $data = json_decode($raw); // json形式をphp変数に変換
 
@@ -15,9 +16,13 @@ $statement->execute();
 
 $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
 
-if($userInfo){
+
+
+if ($userInfo) {
+
+    $_SESSION['user_id'] = $userInfo['id'];
     $error = $data;
-} else{
+} else {
     $error = "error";
 }
 

@@ -232,15 +232,16 @@ main {
   color: white;
   font-weight: bold;
 }
-.post {
+/* .post {
   text-decoration: none;
   color: white;
   display: flex;
+  gap: 17%;
   align-items: center;
   justify-content: center;
   background-color: #0d6efd;
-  font-size: 1.3rem;
-}
+  font-size: 1rem;
+} */
 .post-btn {
   background-color: var(--pink2);
   padding: 1% 2%;
@@ -289,10 +290,18 @@ button {
   width: max-content;
   color: white;
   padding: 1% 2%;
+  gap: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.post{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20%;
+  width: 100%;
 }
 .dislike-container {
   border-radius: 50px;
@@ -473,6 +482,18 @@ button {
   color: black;
   font-size: 1.3rem;
 }
+.close-modal {
+  top: 1%;
+  right: 6%;
+  color: black;
+  font-size: 1.3rem;
+}
+.close-tweet {
+  top: 1%;
+  right: 6%;
+  color: black;
+  font-size: 1.3rem;
+}
 .return1 {
   position: absolute;
   top: 3%;
@@ -517,11 +538,12 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding-top: 2%;
   color: black;
   padding-left: 3%;
   padding-right: 3%;
+  padding-bottom: 4%;
   border-right: 1px solid rgba(0, 0, 0, 0.178);
 }
 .icon {
@@ -543,7 +565,9 @@ button {
   margin-bottom: 4%;
   color: var(--blue);
 }
-
+.fa-heart{
+  font-size: 2.2vh;
+}
 .fa-image {
   font-size: 1.3rem;
 }
@@ -553,6 +577,19 @@ button {
   margin-bottom: 3%;
 }
 .social-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 12%;
+  gap: 9%;
+  width: 100%;
+  font-size: 1.24rem;
+  font-family: "Lato", sans-serif;
+  padding: 5% 0;
+  padding-left: 5%;
+  border-radius: 25px;
+}
+.logOut {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -589,6 +626,16 @@ button {
   justify-content: center;
   padding: 7%;
   border-radius: 30px;
+}
+.logOut {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 7%;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.212);
 }
 
 .btn-bg a {
@@ -651,7 +698,7 @@ button {
   top: 0;
   width: 44.8%;
   left: 35.17%;
-  z-index: 999;
+  z-index: 996;
   background-color: rgba(255, 255, 255, 0.938);
   border-right: 1px solid rgba(0, 0, 0, 0.11);
 }
@@ -841,7 +888,7 @@ button {
 
 .icon2::before {
   content: "";
-  background-color: whitesmoke;
+  background-color: white;
   position: absolute;
   top: 60%;
   left: 10%;
@@ -1057,8 +1104,18 @@ select:focus {
 }
 .bg-gray {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.247);
-  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.397);
+  z-index: 998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.bg-white {
+  position: absolute;
+  background-color: white;
+  z-index: 997;
   top: 0;
   left: 0;
   width: 100%;
@@ -1072,42 +1129,51 @@ select:focus {
 .register-container {
   position: fixed;
   background: white;
-  top: 11%;
-  left: 37%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   z-index: 999;
   width: 540px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 67vh;
+  height: 85%;
   padding-top: 1%;
   border-radius: 15px;
 }
 .signIn-container {
   position: fixed;
   background: white;
-  top: 11%;
-  left: 37%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   z-index: 999;
   width: 540px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 67vh;
+  height: 85%;
   padding-top: 1%;
   border-radius: 15px;
 }
 .icon-container-signup {
   position: fixed;
   background: white;
-  top: 11%;
-  left: 37%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   z-index: 999;
   width: 540px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 67vh;
+  height: 85%;
   padding-top: 1%;
   border-radius: 15px;
   display: none;
@@ -1127,6 +1193,21 @@ select:focus {
   left: 5%;
   font-size: 2rem;
   font-weight: bold;
+}
+.close-modal {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.close-tweet {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  font-size: 1.7rem;
+  font-weight: bold;
+  padding-top: 1%;
 }
 .signIn-container .top h2 {
   font-weight: bolder;
@@ -1223,15 +1304,18 @@ select:focus {
   padding: 6%;
   position: fixed;
   background: white;
-  top: 11%;
+  top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
   z-index: 999;
   width: 540px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 1%;
-  height: 67vh;
+  height: 84%;
   border-radius: 15px;
 }
 .step1 h2 {
@@ -1334,6 +1418,26 @@ select:focus {
   border-radius: 30px;
   pointer-events: none;
 }
+.logOut-confirm {
+  width: 100%;
+  margin-top: 10%;
+  padding: 5% 4%;
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  border-radius: 30px;
+}
+.logOut-cancel {
+  width: 100%;
+  margin-top: 10%;
+  padding: 5% 4%;
+  color: black;
+  font-weight: bold;
+  background-color: white;
+  border-radius: 30px;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.199);
+}
 #close2 {
   position: absolute;
   top: 1%;
@@ -1342,6 +1446,11 @@ select:focus {
 }
 .step-first {
   display: block;
+  padding-top: 11%;
+}
+.step-first2 {
+  display: block;
+  padding-top: 8%;
 }
 .stepNext {
   padding: 19%;
@@ -1563,7 +1672,7 @@ select:focus {
   display: none;
 }
 #check-btn {
-  margin-top: 35%;
+  margin-top: 21%;
 }
 #sign-in {
   display: none;
@@ -1591,15 +1700,22 @@ select:focus {
   padding-top: 1.5%;
 }
 .modal-post {
-  background-color: pink;
+  background-color: white;
+  display: none;
+  position: fixed;
   width: 40%;
-  top: 5%;
-  right: 50%;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
   z-index: 999;
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
+  padding: 2%;
+  border-radius: 15px;
 }
 .modal-post .top {
   padding-top: 3%;
@@ -1608,7 +1724,7 @@ select:focus {
   align-items: flex-start;
   justify-content: flex-start;
   border-bottom: 1px solid rgba(0, 0, 0, 0.068);
-  background-color: pink;
+  background-color: white;
   width: 100%;
   gap: 2%;
 }
@@ -1629,4 +1745,48 @@ select:focus {
 .tweet-form {
   width: 100%;
   padding-right: 3%;
+}
+.profile-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dotted {
+  margin-left: 9%;
+}
+.logout-modal {
+  z-index: 999;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 304px;
+  padding: 3%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-radius: 15px;
+  display: none;
+}
+
+.twitter-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 7%;
+}
+.confirm {
+  color: rgba(0, 0, 0, 0.575);
+  padding-top: 3%;
+  font-size: 0.98rem;
+}
+
+.heart-second{
+  display: none;
+  color: red;
+}
+#comment-btn{
+  cursor: pointer;
 }

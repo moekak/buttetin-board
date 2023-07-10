@@ -47,7 +47,7 @@ class model {
 
     // テーブル結合の処理
     public function join(){
-        $statement = $this->pdo->prepare("SELECT * FROM `user` INNER JOIN `board-table` ON `user`.`id` = `board-table`.`user_id`;");
+        $statement = $this->pdo->prepare("SELECT * FROM `user` INNER JOIN `board-table` ON `user`.`id` = `board-table`.`user_id` ORDER BY `board-table`.`created_at` DESC;");
         $statement->execute();
         $this->joinedData = $statement->fetchAll(PDO::FETCH_ASSOC);
     }

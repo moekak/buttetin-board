@@ -6,7 +6,7 @@ $raw = file_get_contents('php://input'); // POSTされた生のデータを受�
 $data = json_decode($raw); // json形式をphp変数に変換
 
 $res = $data; // やりたい処理
-$check= "error";
+$check = "";
 
 
 $name = $res[0];
@@ -39,12 +39,13 @@ if (!$userInfo) {
 
     $user_id = $pdo->lastInsertId();
 
-    session_start();
+
     $_SESSION["user_id"] = $user_id;
     $_SESSION["name"] = $name;
     $_SESSION["birthday"] = $birthday;
 
-} else{
-    echo json_encode($check); 
+    $check = "success";
+} else {
+    $check = "error";
 }
-
+echo json_encode($check);
