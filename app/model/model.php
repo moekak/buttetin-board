@@ -100,8 +100,8 @@ class model {
 
     // 投稿削除する
     public function deletePost($id){
-        $statement = $this->pdo->prepare("DELETE FROM `board-table` WHERE id = :id");
-        $statement->bindValue(":id", $id);
+        $statement = $this->pdo->prepare("DELETE FROM `board-table` WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $id);
         $statement->execute();
 
     }
@@ -150,24 +150,24 @@ class model {
 
     // 詳細ページの投稿を取得する
     public function getPostDetail($post_id){
-        $statement = $this->pdo->prepare("SELECT * FROM `board-table` WHERE id = :id");
-        $statement->bindValue(":id", $post_id);
+        $statement = $this->pdo->prepare("SELECT * FROM `board-table` WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $post_id);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // テーブル結合の処理
     public function joinPost($post_id){
-        $statement = $this->pdo->prepare("SELECT * FROM `board-table` INNER JOIN `user` ON `user`.`id` = `board-table`.`user_id` WHERE `board-table`.`id`=:id;");
-        $statement->bindValue(":id", $post_id);
+        $statement = $this->pdo->prepare("SELECT * FROM `board-table` INNER JOIN `user` ON `user`.`id` = `board-table`.`user_id` WHERE `board-table`.`post_id`=:post_id;");
+        $statement->bindValue(":post_id", $post_id);
         $statement->execute();
-        return $statement->fetch();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
        
     }
     // 詳細ページの投稿のコメントを取得する
     public function getPostComment($post_id){
-        $statement = $this->pdo->prepare("SELECT * FROM `comment` INNER JOIN `board-table` ON `comment`.`post_id` = `board-table`.`id` WHERE `board-table`.`id`=:id;");
-        $statement->bindValue(":id", $post_id);
+        $statement = $this->pdo->prepare("SELECT * FROM `comment` INNER JOIN `board-table` ON `comment`.`post_id` = `board-table`.`post_id` WHERE `board-table`.`post_id`=:post_id;");
+        $statement->bindValue(":post_id", $post_id);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 

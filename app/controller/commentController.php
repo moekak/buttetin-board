@@ -3,8 +3,8 @@
 require_once(dirname(__FILE__) . "../../service/postServiceFn.php");
 
 $post = new postService();
-if(isset($_POST['id'])){
-   $post->getDetailData($post_id);   
+if(isset($_POST['postID'])){
+   $post->getDetailData($_POST['postID']);   
 }
 
 // $post->comment($_POST);

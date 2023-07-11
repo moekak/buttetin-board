@@ -2,6 +2,7 @@
 require_once dirname(__FILE__) . "/app/controller/controller.php";
 require_once dirname(__FILE__) . "/app/service/postServiceFn.php";
 
+
 $path = "./images/";
 $path2 = "./images2/";
 
@@ -23,6 +24,11 @@ if ($_SESSION["user_id"]) {
 
 // echo $_SESSION["name"]
 
+$postDetails = '';
+if($_SESSION['post']){
+    $postDetails = $_SESSION['post'];
+}
+// print_r($_SESSION['post'])
 ?>
 
 
@@ -127,10 +133,10 @@ if ($_SESSION["user_id"]) {
             </div>
 
             <?php foreach ($postData as $post) : ?>
-                <div class="post-container" data-post-id="<?php echo $post["id"] ?>">
+                <div class="post-container" data-post-id="<?php echo $post['post_id'] ?>">
                     <div class="left relative">
                         <form action="./app/controller/postDetailController.php" method="post">
-                            <input type="hidden" name="post_id" value="<?php echo $post["id"] ?>">
+                            <input type="hidden" name="post_id" value="<?php echo $post['post_id'] ?>">
                             <button type="submit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
                         </form>
                         <div class="post-comment-container border_none">
@@ -153,20 +159,21 @@ if ($_SESSION["user_id"]) {
                                     <img src="<?php echo $path2 . $post["image"] ?>" alt="" class="your-img">
                                 <?php } ?>
                             </div>
-                     
+
                             <div class="comment-section">
-                                <div class="comment-container" class="comment-btn">
-                                    <form action="./app/controller/commentController.php" method="post" id="comment-form">
+                                <div class="comment-container comment-btn">
+                                    <form action="./app/controller/commentController.php" method="post" class="comment-form">
                                         <i class="far fa-comment"></i>
                                         <a class="comment"><?= $post["comments_count"] ?></a>
-                                        <input type="hidden" value="<?= $post['id']?>" name="id">
+                                        <input type="hidden" value="<?= $post['post_id'] ?>" name="postID">
+                                        <?php echo $post['post_id'];?>
                                     </form>
                                 </div>
                                 <div class="like-container">
-                                    <input type="hidden" name="id" value="<?php echo $post["id"] ?>">
-                                    <button type="submit" class=" btn-submit like-btn" data-post-id="<?php echo $post["id"] ?>">
+                                    <input type="hidden" name="id" value="<?php echo $post["post_id"] ?>">
+                                    <button type="submit" class=" btn-submit like-btn" data-post-id="<?php echo $post["post_id"] ?>">
                                         <!-- <i class="far fa-heart"></i> -->
-                                        <div class="post" id="<?php echo $post["id"] ?>">
+                                        <div class="post" id="<?php echo $post["post_id"] ?>">
                                             <i class="far fa-heart heart-one"></i>
                                             <div class="heart-second">
                                                 <i class="fas fa-heart "></i>
@@ -178,27 +185,13 @@ if ($_SESSION["user_id"]) {
                                     </button>
                                 </div>
                                 <div class="dislike-container">
-                                    <button type="submit" class="black btn-submit dislike-btns" data-post-id="<?php echo $post["id"] ?>">
+                                    <button type="submit" class="black btn-submit dislike-btns" data-post-id="<?php echo $post["post_id"] ?>">
                                         <i class="far fa-thumbs-down"></i>
                                         <p>not interested</p>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="comment_container">
-                        <?php if ($userIcon) { ?>
-                        <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon2">
-                        <?php } else { ?>
-                        <img src="./assets/img/user-dummy.png" alt="" class="user-icon2">
-                        <?php } ?>
-                        <form action="./app/controller/commentController.php" method="post" class="w100">
-                            <input type="hidden" value="<?php echo $post["id"] ?>" name="post_id">
-                            <input type="hidden" value="<?php echo $post["user_id"] ?>" name="user_id">
-                            <input type="text" name="comment" class="comment-input" placeholder="Tweet your reply!">
-                            <input type="submit" name="reply-btn" class="reply" value="reply">
-                        </form>
-                    </div> -->
-
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -248,6 +241,9 @@ if ($_SESSION["user_id"]) {
         <button class="logOut-cancel">Cancel</button>
     </div>
 
+    <!-- comment modal -->
+    <?php require_once(dirname(__FILE__) . '/comment.php')?>
+
     <script>
         const likeBtn = document.querySelectorAll(".like-btn");
         const count = document.querySelector(".likeCount");
@@ -283,6 +279,7 @@ if ($_SESSION["user_id"]) {
         likeBtn.forEach(btn => {
             btn.addEventListener("click", () => {
                 let postId = btn.dataset.postId
+                console.log(postId);
                 fetch("./app/api.php", {
                         // 第1引数に送り先
                         method: "POST", // メソッド指定
@@ -441,14 +438,13 @@ if ($_SESSION["user_id"]) {
 
 
         // コメントの処理
-        const commentBtn = document.querySelector('.comment')
-        console.log(commentBtn);
-        commentBtn.forEach((btn)=>{
-            btn.submit();
-            
-        })
-        commentBtn.addEventListener('click', ()=>{
-            document.getElementById('comment-form').submit();
+        const commentBtn = document.querySelectorAll('.comment-btn')
+
+        commentBtn.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                btn.querySelector('.comment-form').submit();
+            })
+
         })
     </script>
 </body>

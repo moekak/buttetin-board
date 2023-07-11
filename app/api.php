@@ -32,8 +32,8 @@ if(isset($_SESSION["user_id"])){
         $statement->bindValue(":user_id", $user_id);
         $statement->execute();
 
-        $statement = $pdo->prepare("UPDATE `board-table` SET `likes_count` = `likes_count` - 1 WHERE id = :id");
-        $statement->bindValue(":id", $res);
+        $statement = $pdo->prepare("UPDATE `board-table` SET `likes_count` = `likes_count` - 1 WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $res);
         $statement->execute();
 
         
@@ -43,8 +43,8 @@ if(isset($_SESSION["user_id"])){
         $statement->bindValue(":post_id", $res);
         $statement->execute();
 
-        $statement = $pdo->prepare("UPDATE `board-table` SET `likes_count` = `likes_count` + 1 WHERE id = :id");
-        $statement->bindValue(":id", $res);
+        $statement = $pdo->prepare("UPDATE `board-table` SET `likes_count` = `likes_count` + 1 WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $res);
         $statement->execute();
 
 
@@ -54,8 +54,8 @@ if(isset($_SESSION["user_id"])){
 } 
 
 
-$statement = $pdo->prepare("SELECT `likes_count` from `board-table` WHERE id = :id");
-$statement->bindValue(":id", $res);
+$statement = $pdo->prepare("SELECT `likes_count` from `board-table` WHERE post_id = :post_id");
+$statement->bindValue(":post_id", $res);
 $statement->execute();
 $likeCount = $statement->fetchColumn();
 

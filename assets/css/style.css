@@ -296,7 +296,7 @@ button {
   align-items: center;
   justify-content: center;
 }
-.post{
+.post {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -565,7 +565,7 @@ button {
   margin-bottom: 4%;
   color: var(--blue);
 }
-.fa-heart{
+.fa-heart {
   font-size: 2.2vh;
 }
 .fa-image {
@@ -1694,7 +1694,8 @@ select:focus {
   display: none;
 }
 .image-container {
-  padding: 2% 3%;
+  margin-top: 5%;
+  margin-left: 10%;
 }
 .tweet-body {
   padding-top: 1.5%;
@@ -1783,10 +1784,20 @@ select:focus {
   font-size: 0.98rem;
 }
 
-.heart-second{
+.heart-second {
   display: none;
   color: red;
 }
-#comment-btn{
+#comment-btn {
   cursor: pointer;
+}
+.comment-modal {
+  width: 45%;
+  background: pink;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }

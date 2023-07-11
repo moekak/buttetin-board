@@ -176,7 +176,7 @@ class postService
     {
         $this->detailData = $this->model->joinPost($post_id);
         $_SESSION["post"] = $this->detailData;
-        header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
+        header("Location: /Coding_practice/PHP_practice/buttetin-board/comment.php");
 
     }
     // 詳細ページ取得
