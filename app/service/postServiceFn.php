@@ -150,8 +150,8 @@ class postService
             $this->commentUserID = $_POST["user_id"];
         }
 
-        if (isset($_POST["post_id"])) {
-            $this->commentPostID = $_POST["post_id"];
+        if (isset($_POST["id"])) {
+            $this->commentPostID = $_POST["id"];
         }
 
         if (isset($_POST["comment"])) {
@@ -164,9 +164,12 @@ class postService
     {
         $this->checkCommentData($post);
         if ($this->commentUserID && $this->commentPostID && $this->comment) {
+            // echo '222';
             $this->model->insertComment($this->commentUserID, $this->commentPostID, $this->comment);
 
             header("Location: ../../index.php");
+        } else{
+            header("Location: ../../comment.php");
         }
 
     }
@@ -191,9 +194,9 @@ class postService
     // コメント件数update
     public function updateCommentCount($post_id)
     {
-        if ($_POST["post_id"]) {
+        if ($_POST["id"]) {
             $this->model->updateComment($post_id);
-            header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
+            header("Location: /Coding_practice/PHP_practice/buttetin-board/index.php");
         }
     }
 }

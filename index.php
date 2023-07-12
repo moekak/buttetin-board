@@ -25,7 +25,7 @@ if ($_SESSION["user_id"]) {
 // echo $_SESSION["name"]
 
 $postDetails = '';
-if($_SESSION['post']){
+if ($_SESSION['post']) {
     $postDetails = $_SESSION['post'];
 }
 // print_r($_SESSION['post'])
@@ -137,7 +137,7 @@ if($_SESSION['post']){
                     <div class="left relative">
                         <form action="./app/controller/postDetailController.php" method="post">
                             <input type="hidden" name="post_id" value="<?php echo $post['post_id'] ?>">
-                            <button type="submit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;"></button>
+                            <button type="submit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 889;"></button>
                         </form>
                         <div class="post-comment-container border_none">
                             <div class="flex-left gap3">
@@ -166,7 +166,6 @@ if($_SESSION['post']){
                                         <i class="far fa-comment"></i>
                                         <a class="comment"><?= $post["comments_count"] ?></a>
                                         <input type="hidden" value="<?= $post['post_id'] ?>" name="postID">
-                                        <?php echo $post['post_id'];?>
                                     </form>
                                 </div>
                                 <div class="like-container">
@@ -241,8 +240,7 @@ if($_SESSION['post']){
         <button class="logOut-cancel">Cancel</button>
     </div>
 
-    <!-- comment modal -->
-    <?php require_once(dirname(__FILE__) . '/comment.php')?>
+
 
     <script>
         const likeBtn = document.querySelectorAll(".like-btn");
@@ -443,9 +441,21 @@ if($_SESSION['post']){
         commentBtn.forEach((btn) => {
             btn.addEventListener('click', () => {
                 btn.querySelector('.comment-form').submit();
+                bg.style.display = 'block'
+
             })
 
         })
+
+        // const formBtn = document.querySelectorAll('.post-comment-container');
+        // const aaa = document.querySelector('.detail-form')
+        // console.log(aaa);
+        // formBtn.forEach((btn) => {
+        //     btn.addEventListener('click', () => {
+
+        //         btn.querySelector('.detail-form').submit();
+        //     })
+        // })
     </script>
 </body>
 

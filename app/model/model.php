@@ -182,17 +182,11 @@ class model {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
     }
-    // コメント件数を獲得する
-    // public function getCommentCount($post_id){
-    //     $statement = $this->pdo->prepare("SELECT * FROM `board-table`");
-    //     $statement->bindValue(":id", $post_id);
-    //     $statement->execute();
-    //     return $statement->fetchAll(PDO::FETCH_ASSOC);
-    // }
+
     // コメント件数をupdateする
     public function updateComment($post_id){
-        $statement = $this->pdo->prepare("UPDATE `board-table` SET  comments_count= comments_count + 1 WHERE id = :id");
-        $statement->bindValue(":id", $post_id);
+        $statement = $this->pdo->prepare("UPDATE `board-table` SET  comments_count= comments_count + 1 WHERE post_id = :post_id");
+        $statement->bindValue(":post_id", $post_id);
         $statement->execute();
     }
 }
