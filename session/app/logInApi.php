@@ -21,6 +21,13 @@ $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
 if ($userInfo) {
 
     $_SESSION['user_id'] = $userInfo['id'];
+    $_SESSION["name"] = $userInfo['name'];
+    $_SESSION["birthday"] = $userInfo['birthday'];
+    $_SESSION["phone"] = $userInfo['phone'];
+    if($userInfo['icon']){
+        $_SESSION['icon'] = $userInfo['icon'];
+    }
+
     $error = $data;
 } else {
     $error = "error";

@@ -29,7 +29,11 @@ if ($_SESSION['post']) {
     $postDetails = $_SESSION['post'];
 }
 // print_r($_SESSION['post'])
+
+echo $_SESSION['name'];
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -57,7 +61,7 @@ if ($_SESSION['post']) {
             <i class="fab fa-twitter"></i>
             <div class="social-icon-container hover1">
                 <i class="fas fa-home"></i>
-                <p>Home</p>
+                <a href="./index.php"><p>Home</p></a>
             </div>
             <div class="social-icon-container hover2">
                 <i class="fas fa-search"></i>
@@ -73,7 +77,7 @@ if ($_SESSION['post']) {
             </div>
             <div class="social-icon-container hover9">
                 <i class="far fa-user"></i>
-                <p>Profile</p>
+                <a href="./personalInfo.php"><p>Profile</p></a>
             </div>
             <div class="social-icon-container hover10">
                 <i class="far fa-circle"></i>

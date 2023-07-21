@@ -13,6 +13,7 @@ class model {
     public $userEmail;
     public $likeData;
     public $likeCount;
+    public $getUserInfo;
     
 
     
@@ -141,8 +142,8 @@ class model {
 
     // コメントをデーターベースに保存する
     public function insertComment($user_id, $post_id, $comment){
-        $statement = $this->pdo->prepare("INSERT INTO `comment`(`user_id`, `post_id`, `comment`) VALUES (:user_id, :post_id,:comment)");
-        $statement->bindValue(":user_id", $user_id);
+        $statement = $this->pdo->prepare("INSERT INTO `comment`(`user_id_comment`, `post_id`, `comment`) VALUES (:user_id_comment, :post_id,:comment)");
+        $statement->bindValue(":user_id_comment", $user_id);
         $statement->bindValue(":post_id", $post_id);
         $statement->bindValue(":comment", $comment);
         $statement->execute();
@@ -166,7 +167,7 @@ class model {
     }
     // 詳細ページの投稿のコメントを取得する
     public function getPostComment($post_id){
-        $statement = $this->pdo->prepare("SELECT * FROM `comment` INNER JOIN `board-table` ON `comment`.`post_id` = `board-table`.`post_id` WHERE `board-table`.`post_id`=:post_id;");
+        $statement = $this->pdo->prepare("SELECT * FROM `comment` INNER JOIN `board-table` ON `comment`.`post_id` = `board-table`.`post_id` JOIN user ON `comment`.user_id_comment = `user`.id WHERE `board-table`.`post_id`=:post_id;");
         $statement->bindValue(":post_id", $post_id);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -189,4 +190,6 @@ class model {
         $statement->bindValue(":post_id", $post_id);
         $statement->execute();
     }
+
+    
 }

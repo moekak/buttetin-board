@@ -7,6 +7,17 @@ $postDetails = '';
 if ($_SESSION['post']) {
       $postDetails = $_SESSION['post'];
 }
+$userId = "";
+if ($_SESSION["user_id"]) {
+    $userId = $_SESSION["user_id"];
+}
+$icon = "";
+if ($_SESSION["icon"]) {
+    $icon = $_SESSION["icon"];
+}
+
+
+
 
 
 ?>
@@ -54,8 +65,8 @@ if ($_SESSION['post']) {
                   <!-- <div class="close-tweet">×</div> -->
                   <div class="top flex2">
                         <div class="home">
-                              <?php if ($postDetail['icon']) { ?>
-                                    <img src="<?php echo $path . $postDetail['icon'] ?>" alt="" class="user-icon">
+                              <?php if ($icon) { ?>
+                                    <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
                               <?php } else { ?>
                                     <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
                               <?php } ?>
@@ -68,8 +79,9 @@ if ($_SESSION['post']) {
                                           <i class="far fa-image user"></i>
                                           <input type="file">
                                     </div>
+                                    <?//php echo $postDetail['user_id']?>
                                     <input type="hidden" value='<?php echo $postDetail['post_id'] ?>' name="id">
-                                    <input type="hidden" value='<?php echo $postDetail['user_id'] ?>' name="user_id">
+                                    <input type="hidden" value='<?php echo $userId ?>' name="user_id">
                                     <button type="submit" class="tweet-btn2" name="tweet">Tweet</button>
                               </div>
 

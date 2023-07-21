@@ -511,7 +511,7 @@ button {
 }
 .logout {
   color: white;
-  background-color: #0d6efd;
+  /* background-color: #0d6efd; */
   border-radius: 20px;
   border: none;
   font-size: 1rem;
@@ -1842,5 +1842,9 @@ select:focus {
   margin-top: 2%;
 }
 .tweet-btn{
+  padding: 0%;
+}
+.arrow{
   padding: 3%;
+  font-weight: bold;
 }

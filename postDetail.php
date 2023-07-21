@@ -8,14 +8,22 @@ $path = "./images/";
 $path2 = "./images2/";
 // $posts = $_SESSION["postData"];
 $posts = ($_SESSION["post"]);
-$comments = $_SESSION["post_comment"];
 
-
-
+$comments = [];
+if ($_SESSION['post_comment']) {
+    $comments = $_SESSION["post_comment"];
+}
 $userId = "";
 if ($_SESSION["user_id"]) {
     $userId = $_SESSION["user_id"];
 }
+$icon = "";
+if ($_SESSION["icon"]) {
+    $icon = $_SESSION["icon"];
+}
+
+// print_r($_SESSION["post_comment"]);
+
 
 
 ?>
@@ -32,7 +40,7 @@ if ($_SESSION["user_id"]) {
     <title>Document</title>
 </head>
 
-<body>
+<body class="contents">
     <div class="bg-white"></div>
     <div class="bg-gray"></div>
     <div class="index-container">
@@ -40,7 +48,7 @@ if ($_SESSION["user_id"]) {
             <i class="fab fa-twitter"></i>
             <div class="social-icon-container hover1">
                 <i class="fas fa-home"></i>
-                <p>Home</p>
+                <a href="./index.php"><p>Home</p></a>
             </div>
             <div class="social-icon-container hover2">
                 <i class="fas fa-search"></i>
@@ -56,7 +64,7 @@ if ($_SESSION["user_id"]) {
             </div>
             <div class="social-icon-container hover9">
                 <i class="far fa-user"></i>
-                <p>Profile</p>
+                <a href="./personalInfo.php"><p>Profile</p></a>
             </div>
             <div class="social-icon-container hover10">
                 <i class="far fa-circle"></i>
@@ -74,8 +82,10 @@ if ($_SESSION["user_id"]) {
 
         </div>
         <main class="bg">
-            <div class="tweet-btn">
-                <a href="./index.php" class="black"><p class="black">←　Tweet</p></a>
+            <div class="arrow">
+                <a href="./index.php" class="black">
+                    <p class="black">←　Tweet</p>
+                </a>
             </div>
             <?php foreach ($posts as $post) : ?>
                 <div class="post-container" data-post-id="<?php echo $post['post_id'] ?>">
@@ -139,45 +149,99 @@ if ($_SESSION["user_id"]) {
                     </div>
                     <div class="top2 flex3">
                         <div class="home">
-                              <?php if ($post['icon']) { ?>
-                                    <img src="<?php echo $path . $post['icon'] ?>" alt="" class="user-icon">
-                              <?php } else { ?>
-                                    <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
-                              <?php } ?>
+                            <?php if ($icon) { ?>
+                                <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
+                            <?php } else { ?>
+                                <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                            <?php } ?>
                         </div>
 
                         <form action="./app/controller/commentController.php" method="post" class="tweet-form">
-                              <textarea type="text" name="comment" class="body-input2" placeholder="Tweet your reply!" rows="3"></textarea>
-                              <div class="tweet-btn-container">
-                                    <div class="icon" id="icon-upload2">
-                                          <i class="far fa-image user"></i>
-                                          <input type="file">
-                                    </div>
-                                    <input type="hidden" value='<?php echo $post['post_id'] ?>' name="id">
-                                    <input type="hidden" value='<?php echo $post['user_id'] ?>' name="user_id">
-                                    <button type="submit" class="tweet-btn2" name="tweet">Reply</button>
-                              </div>
+                            <textarea type="text" name="comment" class="body-input2" placeholder="Tweet your reply!" rows="3"></textarea>
+                            <div class="tweet-btn-container">
+                                <div class="icon" id="icon-upload2">
+                                    <i class="far fa-image user"></i>
+                                    <input type="file">
+                                </div>
+                                <input type="hidden" value='<?php echo $post['post_id'] ?>' name="id">
+                                <input type="hidden" value='<?php echo $post['user_id'] ?>' name="user_id">
+                                <button type="submit" class="tweet-btn2" name="tweet">Reply</button>
+                            </div>
 
                         </form>
-                  </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <?php foreach ($comments as $comment) : ?>
+                <div class="post-container" data-post-id="<?php echo $comment['post_id'] ?>">
+                    <div class="left relative">
+                        <form action="./app/controller/postDetailController.php" method="post">
+                            <input type="hidden" name="post_id" value="<?php echo $comment['post_id'] ?>">
+                            <button type="submit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 889;"></button>
+                        </form>
+                        <div class="post-comment-container border_none">
+                            <div class="flex-left gap3">
+
+                                <div class="icon-containerDetail">
+                                    <?php if ($comment["icon"]) { ?>
+                                        <img src="<?php echo $path . $comment["icon"] ?>" alt="" class="avatar">
+                                    <?php } else { ?>
+                                        <img src="./assets/img/user-dummy.png" alt="" class="avatar">
+                                    <?php } ?>
+                                </div>
+                                <div class="textDetail-container">
+                                    <p class="bold"><?php echo $comment["name"] ?></p>
+                                    <p class="tweet-body"><?= $comment["comment"] ?></p>
+                                </div>
+                            </div>
+                            <div class="comment-section">
+                                <div class="comment-container comment-btn">
+                                    <form action="./app/controller/commentController.php" method="post" class="comment-form">
+                                        <i class="far fa-comment"></i>
+                                        <a class="comment">0</a>
+                                        <input type="hidden" value="<?= $comment['post_id'] ?>" name="postID">
+                                    </form>
+                                </div>
+                                <div class="like-container">
+                                    <input type="hidden" name="id" value="<?php echo $comment["post_id"] ?>">
+                                    <button type="submit" class=" btn-submit like-btn" data-post-id="<?php echo $comment["post_id"] ?>">
+                                        <!-- <i class="far fa-heart"></i> -->
+                                        <div class="post" id="<?php echo $comment["post_id"] ?>">
+                                            <i class="far fa-heart heart-one"></i>
+                                            <div class="heart-second">
+                                                <i class="fas fa-heart "></i>
+                                            </div>
+
+                                            <p class="likeCount">0</p>
+
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="dislike-container">
+                                    <button type="submit" class="black btn-submit dislike-btns" data-post-id="<?php echo $comment["post_id"] ?>">
+                                        <i class="far fa-thumbs-down"></i>
+                                        <p>not interested</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <?php endforeach; ?>
 
         </main>
     </div>
+
     <div class="modal-post absolute" id="js_modal_post">
         <div class="close-tweet">×</div>
         <div class="top">
             <div class="home">
-                <?php if ($userId) { ?>
-                    <?php if ($userIcon) { ?>
-                        <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon">
+               
+                    <?php if ($icon) { ?>
+                        <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
                     <?php } else { ?>
                         <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
                     <?php } ?>
-                <?php } else { ?>
-                    <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
-                <?php } ?>
             </div>
 
             <form action="./app/controller/controller.php" method="post" enctype="multipart/form-data" class="tweet-form">
@@ -212,36 +276,151 @@ if ($_SESSION["user_id"]) {
 
 
 
-
-
     <script>
-        const likeBtn = document.querySelector(".like-btn");
-        likeBtn.addEventListener("click", () => {
-            let postId = likeBtn.dataset.postId
-            fetch("./app/api1.php", {
+        const likeBtn = document.querySelectorAll(".like-btn");
+        const count = document.querySelector(".likeCount");
+        const forms = document.querySelectorAll(".dislike-btns");
+
+        window.addEventListener("load", () => {
+            dislikePost = JSON.parse(localStorage.getItem("post")) || []
+        })
+
+        // 興味ない投稿を非表示にする
+        forms.forEach((form) => {
+            dislikePost = JSON.parse(localStorage.getItem("post")) || []
+            let checkId = form.dataset.postId;
+            if (dislikePost.includes(checkId)) {
+                form.parentElement.parentElement.parentElement.parentElement.style.display = "none";
+            }
+
+            form.addEventListener("click", (e) => {
+                var parent = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+                    .parentElement;
+                const id = parent.dataset.postId;
+                if (form.dataset.postId == id) {
+                    parent.style.display = "none";
+                    dislikePost.push(id)
+                    localStorage.setItem("post", JSON.stringify(dislikePost))
+                }
+            })
+
+        })
+
+        const heart = document.querySelector('.fa-heart')
+        console.log(heart);
+        likeBtn.forEach(btn => {
+            btn.addEventListener("click", () => {
+                let postId = btn.dataset.postId
+                console.log(postId);
+                fetch("./app/api.php", {
+                        // 第1引数に送り先
+                        method: "POST", // メソッド指定
+                        headers: {
+                            "Content-Type": "application/json"
+                        }, // jsonを指定
+                        body: JSON.stringify(postId), // json形式に変換して添付
+                    })
+                    .then((response) => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
+                    .then((res) => {
+                        console.log(res); // やりたい処理
+                        document.querySelectorAll(".post").forEach((post) => {
+                            if (post.id == postId) {
+                                console.log(post.querySelector('.likeCount').textContent);
+                                if (post.querySelector('.likeCount').textContent < res) {
+                                    post.querySelector('.heart-one').style.display = 'none'
+                                    post.querySelector('.heart-second').style.display = 'block'
+                                    post.querySelector('.likeCount').style.color = 'red'
+                                } else {
+                                    post.querySelector('.heart-one').style.display = 'block'
+                                    post.querySelector('.heart-second').style.display = 'none'
+                                    post.querySelector('.likeCount').style.color = 'rgba(0, 0, 0, 0.616)'
+                                }
+                                post.querySelector(".likeCount").textContent = res;
+
+
+                            }
+
+                        })
+
+                    })
+                    .catch((error) => {
+                        console.log(error); // エラー表示
+                    });
+            })
+        });
+
+
+        // コメントの処理
+        const commentBtn = document.querySelectorAll('.comment-btn')
+
+        commentBtn.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                btn.querySelector('.comment-form').submit();
+                bg.style.display = 'block'
+
+            })
+
+        })
+        // logout
+        const logoutBtn = document.getElementById("js_logout")
+        const gray = document.querySelector('.bg-gray')
+        const white = document.querySelector('.bg-white')
+        const contents = document.querySelector('.contents')
+        const confirmBtn = document.querySelector(".logOut-confirm")
+        const cancelBtn = document.querySelector(".logOut-cancel")
+        const modal = document.querySelector('.logout-modal')
+        console.log(confirmBtn);
+
+        logoutBtn.addEventListener("click", () => {
+            gray.style.display = "block"
+            white.style.display = "block";
+            contents.style.overflow = "hidden"
+            modal.style.display = 'block'
+
+        })
+        cancelBtn.addEventListener('click', () => {
+            gray.style.display = "none"
+            white.style.display = "none";
+            contents.style.overflow = "auto"
+            modal.style.display = 'none'
+        })
+        confirmBtn.addEventListener("click", () => {
+            fetch("./session/app/logoutApi.php", {
+
                     // 第1引数に送り先
                     method: "POST", // メソッド指定
                     headers: {
                         "Content-Type": "application/json"
                     }, // jsonを指定
-                    body: JSON.stringify(postId), // json形式に変換して添付
+
+                    body: JSON.stringify("logout"), // json形式に変換して添付
                 })
                 .then((response) => response.json()) // 返ってきたレスポンスをjsonで受け取って次のthenへ渡す
                 .then((res) => {
                     console.log(res); // やりたい処理
-                    // document.querySelectorAll(".post").forEach((post) => {
-                    //     if (post.id == postId) {
-                    //         post.querySelector(".likeCount").textContent = res[0][
-                    //             "likes_count"
-                    //         ];
-                    //     }
-
-                    // })
-
+                    if (res == 'success2') {
+                        window.location.replace("./index2.php")
+                    }
                 })
                 .catch((error) => {
-                    console.log(error); // エラー表示
+                    console.log(error);
+
                 });
+        })
+
+        // modal post
+        const modalPost = document.getElementById('js_modal_post')
+        const tweetBtn = document.querySelector('.btn-bg')
+        const closeTweet = document.querySelector('.close-tweet')
+
+
+        tweetBtn.addEventListener('click', () => {
+            modalPost.style.display = 'block';
+            gray.style.display = 'block';
+        })
+        closeTweet.addEventListener('click', () => {
+            gray.style.display = 'none';
+            modalPost.style.display = 'none';
         })
     </script>
 </body>

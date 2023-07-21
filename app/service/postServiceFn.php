@@ -29,6 +29,7 @@ class postService
     public $image;
     public $filename;
     public $obj;
+    public $getUserData;
 
     public function __construct()
     {
@@ -186,6 +187,7 @@ class postService
     public function getPostCommentFn($post_id)
     {
         $this->postComment = $this->model->getPostComment($post_id);
+     
         $_SESSION["post_comment"] = $this->postComment;
         header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
 
@@ -199,4 +201,7 @@ class postService
             header("Location: /Coding_practice/PHP_practice/buttetin-board/index.php");
         }
     }
+
+
+
 }
