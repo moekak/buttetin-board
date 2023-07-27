@@ -191,5 +191,16 @@ class model {
         $statement->execute();
     }
 
+
+    // 背景画像を保存する
+    public function insertBg($user_id, $filename){
+        $statement = $this->pdo->prepare("UPDATE `user` SET `bg_img` = :bg_img WHERE id = :id" );
+        $statement->bindValue(":id", $user_id);
+        $statement->bindValue(":bg_img", $filename);
+        $statement->execute();
+
+        $_SESSION["bg-img"] = $filename;
+    }
+
     
 }

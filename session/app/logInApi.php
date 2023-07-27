@@ -24,6 +24,7 @@ if ($userInfo) {
     $_SESSION["name"] = $userInfo['name'];
     $_SESSION["birthday"] = $userInfo['birthday'];
     $_SESSION["phone"] = $userInfo['phone'];
+    $_SESSION["login_name"] = $userInfo["login_name"];
     if($userInfo['icon']){
         $_SESSION['icon'] = $userInfo['icon'];
     }

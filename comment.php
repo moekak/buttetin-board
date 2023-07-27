@@ -17,9 +17,6 @@ if ($_SESSION["icon"]) {
 }
 
 
-
-
-
 ?>
 
 <!DOCTYPE html>

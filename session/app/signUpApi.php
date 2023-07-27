@@ -15,7 +15,10 @@ $birthday = $res[2];
 $password = $res[3];
 date_default_timezone_set('Asia/Tokyo');
 $now = date('Y-m-d H:i:s');
+$now2 = date('His');
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+$login = "@" . $name . $now2;
 
 $pdo = new PDO('mysql:host=localhost;dbname=board', 'root');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -29,12 +32,13 @@ $userInfo = $statement->fetch(PDO::FETCH_ASSOC);
 if (!$userInfo) {
  
 
-    $statement = $pdo->prepare("INSERT INTO `user` (`name`, `phone`, `password`, `created_at`, `birthday`) VALUES (:name, :phone, :password,  :created_at, :birthday)");
+    $statement = $pdo->prepare("INSERT INTO `user` (`name`, `phone`, `password`, `created_at`, `birthday`, `login_name`) VALUES (:name, :phone, :password,  :created_at, :birthday, :login_name)");
     $statement->bindValue(':name', $name);
     $statement->bindValue(':phone', $phone);
     $statement->bindValue(':password', $password_hash);
     $statement->bindValue(':birthday', $birthday);
     $statement->bindValue(':created_at', $now);
+    $statement->bindValue(':login_name', $login);
 
     $statement->execute();
 
@@ -48,9 +52,13 @@ if (!$userInfo) {
     $_SESSION["country"] = '';
     $_SESSION["introduction"] = '';
     $_SESSION["web_site"] = '';
+    $_SESSION["phone"] = $phone;
+    $_SESSION["login_name"] = $login;
 
     $check = "success";
 } else {
     $check = "error";
 }
+
+
 echo json_encode($check);

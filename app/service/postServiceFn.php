@@ -31,6 +31,9 @@ class postService
     public $obj;
     public $getUserData;
 
+    public $filename2;
+    public $image2;
+
     public function __construct()
     {
         $this->model = new model();
@@ -70,6 +73,28 @@ class postService
 
         }
         $this->date = date('Y-m-d');
+    }
+
+    // 背景画像を保存する
+    public function insertBG()
+    {
+        $this->image2 = $_FILES["bg-img"];
+        if (!file_exists("../../images3")) {
+            mkdir("../../images3");
+        }
+
+        if ($_POST["user_id"]) {
+            $this->filename2 = $this->obj->randomString(8) . "/" . $this->image2["name"];
+            $imagePath = "../../images3";
+
+            mkdir(dirname($imagePath . "/" . $this->filename2));
+            // echo $imagePath . "/" . $this->filename2;
+            move_uploaded_file($this->image2["tmp_name"], $imagePath . "/" . $this->filename2);
+
+            $this->model->insertBg($_POST["user_id"], $this->filename2);
+            header("Location: http://localhost/Coding_practice/PHP_practice/buttetin-board/personalInfo.php");
+        }
+
     }
 
 // 送られてきた投稿をデーターベースに保存する処理
@@ -169,7 +194,7 @@ class postService
             $this->model->insertComment($this->commentUserID, $this->commentPostID, $this->comment);
 
             header("Location: ../../index.php");
-        } else{
+        } else {
             header("Location: ../../comment.php");
         }
 
@@ -187,7 +212,7 @@ class postService
     public function getPostCommentFn($post_id)
     {
         $this->postComment = $this->model->getPostComment($post_id);
-     
+
         $_SESSION["post_comment"] = $this->postComment;
         header("Location: /Coding_practice/PHP_practice/buttetin-board/postDetail.php");
 
@@ -201,7 +226,5 @@ class postService
             header("Location: /Coding_practice/PHP_practice/buttetin-board/index.php");
         }
     }
-
-
 
 }

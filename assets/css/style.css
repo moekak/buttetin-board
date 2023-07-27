@@ -96,6 +96,18 @@ main {
   border-left: 1px solid rgba(0, 0, 0, 0.096);
   border-right: 1px solid rgba(0, 0, 0, 0.096);
   margin-left: 24.6%;
+  position: absolute;
+  top: 0;
+  left: 75.3%;
+}
+.bg2{
+  border-left: 1px solid rgba(0, 0, 0, 0.096);
+  border-right: 1px solid rgba(0, 0, 0, 0.096);
+  position: absolute;
+  top: 0;
+  left: 650px;
+  width: 600px;
+
 }
 .main {
   width: 40%;
@@ -532,14 +544,14 @@ button {
   } */
 .nav-second {
   z-index: 200;
-  width: 20%;
+  width: 349px;
   background: white;
 
   position: fixed;
   /* transform: translateX(-500px); */
   height: 100vh;
   /* background-color: white; */
-  margin-left: 15%;
+  margin-left: 300px;
   top: 0;
   left: 0;
   display: flex;
@@ -701,9 +713,9 @@ button {
 }
 
 .fixed {
-  position: fixed;
+  position: sticky;
   top: 0;
-  width: 44.8%;
+  width: 599px;
   left: 35.17%;
   z-index: 996;
   background-color: rgba(255, 255, 255, 0.938);
@@ -807,9 +819,10 @@ button {
   justify-content: center;
 }
 .index-container {
-  width: 60%;
+  width: 903px;
   padding-bottom: 8%;
   min-height: 100vh;
+  /* margin-left: 349px; */
   border-right: 1px solid rgba(0, 0, 0, 0.13);
 }
 .dummy-detail {
@@ -854,6 +867,11 @@ button {
   position: relative;
   width: 60%;
 }
+.bg-container-edit{
+  position: relative;
+  width: 681px;
+  height: 200px;
+}
 .icon2 input[type="file"] {
   height: 100%;
   left: 0;
@@ -886,10 +904,7 @@ button {
   width: 50%;
   min-height: 100vh;
 }
-.bg-img {
-  width: 166.8%;
-  height: 150px;
-}
+
 .camera-icon {
   color: white;
   font-size: 3rem;
@@ -1187,6 +1202,28 @@ select:focus {
 }
 .icon-container-signup {
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  width: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85%;
+  padding-top: 1%;
+  border-radius: 15px;
+  /* display: none; */
+}
+.edit-first{
+  display: block;
+}
+.edit-second{
+  display: none;
+}
+.modal-edit-profile {
+  position: fixed;
   background: white;
   top: 50%;
   left: 50%;
@@ -1198,12 +1235,19 @@ select:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 85%;
+  height: 65%;
   padding-top: 1%;
   border-radius: 15px;
   display: none;
 }
-
+.edit-profile-container{
+  padding: 3%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .register-container .top {
   background-color: white;
   text-align: center;
@@ -1211,6 +1255,9 @@ select:focus {
 .signIn-container .top {
   background-color: white;
   text-align: center;
+}
+input{
+  width: 100%;
 }
 .close {
   position: absolute;
@@ -1621,7 +1668,7 @@ select:focus {
 .icon {
   display: inline-block;
   position: relative;
-  width: 60%;
+  width: 50%;
 }
 .icon input[type="file"] {
   height: 100%;
@@ -1633,7 +1680,9 @@ select:focus {
 }
 .user-dummy {
   width: 74%;
-  margin: 18% 0% 0% 42%;
+  /* margin: 18% 0% 0% 42%; */
+  margin-top: 25%;
+  border-radius: 50%;
 }
 .your-img2 {
   width: 74%;
@@ -1648,6 +1697,15 @@ select:focus {
 .next-btn2 {
   background-color: rgba(0, 0, 0, 0.521);
   width: 100%;
+  margin-top: 20%;
+  padding: 4% 0%;
+  color: white;
+  border-radius: 30px;
+  font-weight: 700;
+}
+.next-btn3 {
+  background-color: rgba(0, 0, 0, 0.521);
+  width: 70%;
   margin-top: 20%;
   padding: 4% 0%;
   color: white;
@@ -1847,4 +1905,61 @@ select:focus {
 .arrow{
   padding: 3%;
   font-weight: bold;
+}
+.bg-pic{
+  width: 50px;
+  height: 50px;
+}
+.edit-second{
+  width: 80%;
+}
+.gray{
+  width: 100%;
+  height: 15vh;
+  background-color: rgba(128, 128, 128, 0.37);
+  margin-top: 15%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.edit-first p{
+  color: rgba(0, 0, 0, 0.548);
+  margin-top: 2%;
+}
+.edit-second p{
+  color: rgba(0, 0, 0, 0.548);
+  margin-top: 2%;
+}
+.user-dummy2{
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+.edit-icon-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 5%;
+}
+.edit-name{
+  margin-top: 5%;
+  margin-left: 2%;
+}
+#skip2{
+  margin-top: 6%;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#displayImage2{
+  position: absolute;
+  right: 13%;
+}
+.edit-next{
+  display: none;
 }

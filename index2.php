@@ -715,7 +715,7 @@ $post = $_SESSION["postData"];
                     console.log(res); // やりたい処理
                     if (res == "error") {
                         localStorage.setItem("loaded", "failed")
-                    } else{
+                    } else {
                         localStorage.setItem("loaded", "loaded")
                     }
                 })

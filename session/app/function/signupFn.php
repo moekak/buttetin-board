@@ -54,7 +54,7 @@ class signupFn
         if($_SESSION["user_id"] && $this->icon){
             $this->model->insertUserInfo($this->filename, $_SESSION["user_id"]);
             $_SESSION["icon"] = $this->filename;
-            header("Location: ../../../index.php" );
+            header("Location: ../../../personalInfo.php" );
         } 
     }
 
