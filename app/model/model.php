@@ -14,6 +14,7 @@ class model
     public $likeData;
     public $likeCount;
     public $getUserInfo;
+    public $data;
 
     public function __construct()
     {
@@ -215,5 +216,40 @@ class model
 
         $_SESSION["bg-img"] = $filename;
     }
- 
+
+    // フォロー機能
+    public function following($following, $follower)
+    {
+        $statement = $this->pdo->prepare("INSERT INTO `following-table`(`following_user_id`, `follower_user_id`) VALUES (:following_user_id, :follower_user_id)");
+        $statement->bindValue(":following_user_id", $following);
+        $statement->bindValue(":follower_user_id", $follower);
+        $statement->execute();
+
+    }
+
+    // 既にデータベースに登録してるか確認（フォロー機能）
+    // public function checkID($user_id, $following){
+    //     $statement = $this->pdo->prepare("SELECT * FROM `following-table` WHERE following_user_id = :following_user_id");
+    //     $statement->bindValue(":following_user_id", $following);
+    //     $statement->execute();
+    //     return $statement->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    // 既にフォローしてるか確認する
+    public function checkFollowing($following, $follower){
+        $statement = $this->pdo->prepare("SELECT * FROM `following-table` WHERE following_user_id = :following_user_id AND follower_user_id = :follower_user_id");
+        $statement->bindValue(":following_user_id", $following);
+        $statement->bindValue(":follower_user_id", $follower);
+        $statement->execute();
+        $this->data =  $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // 既にフォローしてた時に外す
+    public function unfollow($following, $follower){
+        $statement = $this->pdo->prepare("DELETE FROM `following-table` WHERE following_user_id = :following_user_id AND follower_user_id = :follower_user_id");
+        $statement->bindValue(":following_user_id", $following);
+        $statement->bindValue(":follower_user_id", $follower);
+        $statement->execute();
+    }
+
 }

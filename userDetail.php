@@ -22,6 +22,12 @@ $year = $date->format("Y");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <style>
+        #style{
+            color : <?= $_SESSION["changeColor"]?>;
+            background: <?= $_SESSION["changeBG"]?>;
+        }
+    </style>
     <script src="https://kit.fontawesome.com/49c418fc8e.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
@@ -105,9 +111,17 @@ $year = $date->format("Y");
                 <div class="email">
                     <a href="/"><i class="far fa-envelope"></i></a>
                 </div>
-                <button class="follow-btn">
-                    <div id="follow-btn">Follow</div>
-                </button>
+                <form action="./app/controller/followingController.php" method="post">
+                    <input type="hidden" value="<?php echo $userDetail["id"]?>" name="following_id">
+                    <button class="follow-btn" id="style">
+                        <?php if($_SESSION["changeColor"] == "white"){?>
+                            <div id="follow-btn">Follow</div> 
+                        <?php } else {?>
+                           <div id="follow-btn">Following</div> 
+                        <?php }?>
+                        
+                    </button>
+                </form> 
             </div>
             <div class="info-detail">
                 <p class="personal-info font_size2 bold"><?=$userDetail["name"]?></p>
