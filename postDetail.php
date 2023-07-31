@@ -24,8 +24,6 @@ if ($_SESSION["icon"]) {
 
 // print_r($_SESSION["post_comment"]);
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -43,240 +41,254 @@ if ($_SESSION["icon"]) {
 <body class="contents">
     <div class="bg-white"></div>
     <div class="bg-gray"></div>
-    <div class="index-container">
-        <div class="nav-second" id="nav-second">
-            <i class="fab fa-twitter"></i>
-            <div class="social-icon-container hover1">
-                <i class="fas fa-home"></i>
-                <a href="./index.php"><p>Home</p></a>
-            </div>
-            <div class="social-icon-container hover2">
-                <i class="fas fa-search"></i>
-                <p>Explore</p>
-            </div>
-            <div class="social-icon-container hover3">
-                <i class="far fa-bell"></i>
-                <p>Notifications</p>
-            </div>
-            <div class="social-icon-container hover4">
-                <i class="far fa-envelope"></i>
-                <p>Messages</p>
-            </div>
-            <div class="social-icon-container hover9">
-                <i class="far fa-user"></i>
-                <a href="./personalInfo.php"><p>Profile</p></a>
-            </div>
-            <div class="social-icon-container hover10">
-                <i class="far fa-circle"></i>
-                <p>More</p>
-            </div>
-            <div class="social-icon-container btn-bg">
-                <button class="tweet-btn">Tweet</button>
-            </div>
-            <div class="logOut" id="js_logout">
-                <button class="logOut-btn">Log out</button>
 
-            </div>
-
-
-
+    <div class="nav-second" id="nav-second">
+        <i class="fab fa-twitter"></i>
+        <div class="social-icon-container hover1">
+            <i class="fas fa-home"></i>
+            <a href="./index.php">
+                <p>Home</p>
+            </a>
         </div>
-        <main class="bg">
-            <div class="arrow">
-                <a href="./index.php" class="black">
-                    <p class="black">←　Tweet</p>
-                </a>
-            </div>
-            <?php foreach ($posts as $post) : ?>
-                <div class="post-container" data-post-id="<?php echo $post['post_id'] ?>">
-                    <div class="left relative">
-                        <form action="./app/controller/postDetailController.php" method="post">
-                            <input type="hidden" name="post_id" value="<?php echo $post['post_id'] ?>">
-                            <button type="submit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 889;"></button>
-                        </form>
-                        <div class="post-comment-container border_none">
-                            <div class="flex-left gap3">
+        <div class="social-icon-container hover2">
+            <i class="fas fa-search"></i>
+            <p>Explore</p>
+        </div>
+        <div class="social-icon-container hover3">
+            <i class="far fa-bell"></i>
+            <p>Notifications</p>
+        </div>
+        <div class="social-icon-container hover4">
+            <i class="far fa-envelope"></i>
+            <p>Messages</p>
+        </div>
+        <div class="social-icon-container hover9">
+            <i class="far fa-user"></i>
+            <a href="./personalInfo.php">
+                <p>Profile</p>
+            </a>
+        </div>
+        <div class="social-icon-container hover10">
+            <i class="far fa-circle"></i>
+            <p>More</p>
+        </div>
+        <div class="social-icon-container btn-bg">
+            <button class="tweet-btn">Tweet</button>
+        </div>
+        <div class="logOut" id="js_logout">
+            <button class="logOut-btn">Log out</button>
 
-                                <div class="icon-containerDetail">
-                                    <?php if ($post["icon"]) { ?>
-                                        <img src="<?php echo $path . $post["icon"] ?>" alt="" class="avatar">
-                                    <?php } else { ?>
-                                        <img src="./assets/img/user-dummy.png" alt="" class="avatar">
-                                    <?php } ?>
-                                </div>
-                                <div class="textDetail-container">
-                                    <p class="bold"><?php echo $post["name"] ?></p>
-                                    <p class="tweet-body"><?= $post["body"] ?></p>
-                                </div>
-                            </div>
-                            <div class="image-container">
-                                <?php if ($post["image"]) { ?>
-                                    <img src="<?php echo $path2 . $post["image"] ?>" alt="" class="your-img">
-                                <?php } ?>
-                            </div>
-
-                            <div class="comment-section">
-                                <div class="comment-container comment-btn">
-                                    <form action="./app/controller/commentController.php" method="post" class="comment-form">
-                                        <i class="far fa-comment"></i>
-                                        <a class="comment"><?= $post["comments_count"] ?></a>
-                                        <input type="hidden" value="<?= $post['post_id'] ?>" name="postID">
-                                    </form>
-                                </div>
-                                <div class="like-container">
-                                    <input type="hidden" name="id" value="<?php echo $post["post_id"] ?>">
-                                    <button type="submit" class=" btn-submit like-btn" data-post-id="<?php echo $post["post_id"] ?>">
-                                        <!-- <i class="far fa-heart"></i> -->
-                                        <div class="post" id="<?php echo $post["post_id"] ?>">
-                                            <i class="far fa-heart heart-one"></i>
-                                            <div class="heart-second">
-                                                <i class="fas fa-heart "></i>
-                                            </div>
-
-                                            <p class="likeCount"><?php echo $post["likes_count"] ?></p>
-
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="dislike-container">
-                                    <button type="submit" class="black btn-submit dislike-btns" data-post-id="<?php echo $post["post_id"] ?>">
-                                        <i class="far fa-thumbs-down"></i>
-                                        <p>not interested</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="top2 flex3">
-                        <div class="home">
-                            <?php if ($icon) { ?>
-                                <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
-                            <?php } else { ?>
-                                <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
-                            <?php } ?>
-                        </div>
-
-                        <form action="./app/controller/commentController.php" method="post" class="tweet-form">
-                            <textarea type="text" name="comment" class="body-input2" placeholder="Tweet your reply!" rows="3"></textarea>
-                            <div class="tweet-btn-container">
-                                <div class="icon" id="icon-upload2">
-                                    <i class="far fa-image user"></i>
-                                    <input type="file">
-                                </div>
-                                <input type="hidden" value='<?php echo $post['post_id'] ?>' name="id">
-                                <input type="hidden" value='<?php echo $post['user_id'] ?>' name="user_id">
-                                <button type="submit" class="tweet-btn2" name="tweet">Reply</button>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-            <?php foreach ($comments as $comment) : ?>
-                <div class="post-container" data-post-id="<?php echo $comment['post_id'] ?>">
-                    <div class="left relative">
-                        <form action="./app/controller/postDetailController.php" method="post">
-                            <input type="hidden" name="post_id" value="<?php echo $comment['post_id'] ?>">
-                            <button type="submit" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 889;"></button>
-                        </form>
-                        <div class="post-comment-container border_none">
-                            <div class="flex-left gap3">
-
-                                <div class="icon-containerDetail">
-                                    <?php if ($comment["icon"]) { ?>
-                                        <img src="<?php echo $path . $comment["icon"] ?>" alt="" class="avatar">
-                                    <?php } else { ?>
-                                        <img src="./assets/img/user-dummy.png" alt="" class="avatar">
-                                    <?php } ?>
-                                </div>
-                                <div class="textDetail-container">
-                                    <p class="bold"><?php echo $comment["name"] ?></p>
-                                    <p class="tweet-body"><?= $comment["comment"] ?></p>
-                                </div>
-                            </div>
-                            <div class="comment-section">
-                                <div class="comment-container comment-btn">
-                                    <form action="./app/controller/commentController.php" method="post" class="comment-form">
-                                        <i class="far fa-comment"></i>
-                                        <a class="comment">0</a>
-                                        <input type="hidden" value="<?= $comment['post_id'] ?>" name="postID">
-                                    </form>
-                                </div>
-                                <div class="like-container">
-                                    <input type="hidden" name="id" value="<?php echo $comment["post_id"] ?>">
-                                    <button type="submit" class=" btn-submit like-btn" data-post-id="<?php echo $comment["post_id"] ?>">
-                                        <!-- <i class="far fa-heart"></i> -->
-                                        <div class="post" id="<?php echo $comment["post_id"] ?>">
-                                            <i class="far fa-heart heart-one"></i>
-                                            <div class="heart-second">
-                                                <i class="fas fa-heart "></i>
-                                            </div>
-
-                                            <p class="likeCount">0</p>
-
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="dislike-container">
-                                    <button type="submit" class="black btn-submit dislike-btns" data-post-id="<?php echo $comment["post_id"] ?>">
-                                        <i class="far fa-thumbs-down"></i>
-                                        <p>not interested</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-
-        </main>
-    </div>
-
-    <div class="modal-post absolute" id="js_modal_post">
-        <div class="close-tweet">×</div>
-        <div class="top">
-            <div class="home">
-               
-                    <?php if ($icon) { ?>
-                        <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
-                    <?php } else { ?>
-                        <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
-                    <?php } ?>
-            </div>
-
-            <form action="./app/controller/controller.php" method="post" enctype="multipart/form-data" class="tweet-form">
-                <textarea type="text" name="body" class="body-input2" placeholder="What is happening?!" rows="4"></textarea>
-                <img id="displayImage2" src="#" alt="your image" style="display:none;" class="your-img">
-                <div class="tweet-btn-container">
-                    <div class="icon" id="icon-upload2">
-                        <i class="far fa-image user"></i>
-                        <input type="file" name="image">
-                    </div>
-                    <button type="submit" class="tweet-btn2">Tweet</button>
-                </div>
-
-            </form>
         </div>
 
 
+
     </div>
-    <!-- logout modal -->
-    <div class="logout-modal">
-        <div class="twitter-container">
-            <i class="fab fa-twitter"></i>
+    <article class="bg2">
+        <div class="arrow">
+            <a href="./index.php" class="black">
+                <p class="black">←　Tweet</p>
+            </a>
         </div>
-        <h3>Log out of Twitter?</h3>
-        <p class="confirm">You can always log back in at any time. If you just want to switch accounts, you can do that by adding and existing accounts.</p>
+        <?php foreach ($posts as $post): ?>
+        <div class="post-container" data-post-id="<?php echo $post['post_id'] ?>">
+            <div class="left relative">
+                <form action="./app/controller/postDetailController.php" method="post">
+                    <input type="hidden" name="post_id" value="<?php echo $post['post_id'] ?>">
+                    <button type="submit"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 889;"></button>
+                </form>
+                <div class="post-comment-container border_none">
+                    <div class="flex-left gap3">
 
-        <button class="logOut-confirm">Log out</button>
-        <button class="logOut-cancel">Cancel</button>
-    </div>
+                        <div class="icon-containerDetail">
+                            <?php if ($post["icon"]) {?>
+                            <img src="<?php echo $path . $post["icon"] ?>" alt="" class="avatar">
+                            <?php } else {?>
+                            <img src="./assets/img/user-dummy.png" alt="" class="avatar">
+                            <?php }?>
+                        </div>
+                        <div class="textDetail-container">
+                            <p class="bold"><?php echo $post["name"] ?></p>
+                            <p class="tweet-body"><?=$post["body"]?></p>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <?php if ($post["image"]) {?>
+                        <img src="<?php echo $path2 . $post["image"] ?>" alt="" class="your-img">
+                        <?php }?>
+                    </div>
+
+                    <div class="comment-section">
+                        <div class="comment-container comment-btn">
+                            <form action="./app/controller/commentController.php" method="post" class="comment-form">
+                                <i class="far fa-comment"></i>
+                                <a class="comment"><?=$post["comments_count"]?></a>
+                                <input type="hidden" value="<?=$post['post_id']?>" name="postID">
+                            </form>
+                        </div>
+                        <div class="like-container">
+                            <input type="hidden" name="id" value="<?php echo $post["post_id"] ?>">
+                            <button type="submit" class=" btn-submit like-btn"
+                                data-post-id="<?php echo $post["post_id"] ?>">
+                                <!-- <i class="far fa-heart"></i> -->
+                                <div class="post" id="<?php echo $post["post_id"] ?>">
+                                    <i class="far fa-heart heart-one"></i>
+                                    <div class="heart-second">
+                                        <i class="fas fa-heart "></i>
+                                    </div>
+
+                                    <p class="likeCount"><?php echo $post["likes_count"] ?></p>
+
+                                </div>
+                            </button>
+                        </div>
+                        <div class="dislike-container">
+                            <button type="submit" class="black btn-submit dislike-btns"
+                                data-post-id="<?php echo $post["post_id"] ?>">
+                                <i class="far fa-thumbs-down"></i>
+                                <p>not interested</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="top2 flex3">
+                <div class="home">
+                    <?php if ($icon) {?>
+                    <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
+                    <?php } else {?>
+                    <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                    <?php }?>
+                </div>
+
+                <form action="./app/controller/commentController.php" method="post" class="tweet-form">
+                    <textarea type="text" name="comment" class="body-input2" placeholder="Tweet your reply!"
+                        rows="3"></textarea>
+                    <div class="tweet-btn-container">
+                        <div class="icon" id="icon-upload2">
+                            <i class="far fa-image user"></i>
+                            <input type="file">
+                        </div>
+                        <input type="hidden" value='<?php echo $post['post_id'] ?>' name="id">
+                        <input type="hidden" value='<?php echo $post['user_id'] ?>' name="user_id">
+                        <button type="submit" class="tweet-btn2" name="tweet">Reply</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <?php endforeach;?>
+        <?php foreach ($comments as $comment): ?>
+        <div class="post-container" data-post-id="<?php echo $comment['post_id'] ?>">
+            <div class="left relative">
+                <form action="./app/controller/postDetailController.php" method="post">
+                    <input type="hidden" name="post_id" value="<?php echo $comment['post_id'] ?>">
+                    <button type="submit"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 889;"></button>
+                </form>
+                <div class="post-comment-container border_none">
+                    <div class="flex-left gap3">
+
+                        <div class="icon-containerDetail">
+                            <?php if ($comment["icon"]) {?>
+                            <img src="<?php echo $path . $comment["icon"] ?>" alt="" class="avatar">
+                            <?php } else {?>
+                            <img src="./assets/img/user-dummy.png" alt="" class="avatar">
+                            <?php }?>
+                        </div>
+                        <div class="textDetail-container">
+                            <p class="bold"><?php echo $comment["name"] ?></p>
+                            <p class="tweet-body"><?=$comment["comment"]?></p>
+                        </div>
+                    </div>
+                    <div class="comment-section">
+                        <div class="comment-container comment-btn">
+                            <form action="./app/controller/commentController.php" method="post" class="comment-form">
+                                <i class="far fa-comment"></i>
+                                <a class="comment">0</a>
+                                <input type="hidden" value="<?=$comment['post_id']?>" name="postID">
+                            </form>
+                        </div>
+                        <div class="like-container">
+                            <input type="hidden" name="id" value="<?php echo $comment["post_id"] ?>">
+                            <button type="submit" class=" btn-submit like-btn"
+                                data-post-id="<?php echo $comment["post_id"] ?>">
+                                <!-- <i class="far fa-heart"></i> -->
+                                <div class="post" id="<?php echo $comment["post_id"] ?>">
+                                    <i class="far fa-heart heart-one"></i>
+                                    <div class="heart-second">
+                                        <i class="fas fa-heart "></i>
+                                    </div>
+
+                                    <p class="likeCount">0</p>
+
+                                </div>
+                            </button>
+                        </div>
+                        <div class="dislike-container">
+                            <button type="submit" class="black btn-submit dislike-btns"
+                                data-post-id="<?php echo $comment["post_id"] ?>">
+                                <i class="far fa-thumbs-down"></i>
+                                <p>not interested</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach;?>
+
+        </article>
+
+
+        <div class="modal-post absolute" id="js_modal_post">
+            <div class="close-tweet">×</div>
+            <div class="top">
+                <div class="home">
+
+                    <?php if ($icon) {?>
+                    <img src="<?php echo $path . $icon ?>" alt="" class="user-icon">
+                    <?php } else {?>
+                    <img src="./assets/img/user-dummy.png" alt="" class="user-icon">
+                    <?php }?>
+                </div>
+
+                <form action="./app/controller/controller.php" method="post" enctype="multipart/form-data"
+                    class="tweet-form">
+                    <textarea type="text" name="body" class="body-input2" placeholder="What is happening?!"
+                        rows="4"></textarea>
+                    <img id="displayImage2" src="#" alt="your image" style="display:none;" class="your-img">
+                    <div class="tweet-btn-container">
+                        <div class="icon" id="icon-upload2">
+                            <i class="far fa-image user"></i>
+                            <input type="file" name="image">
+                        </div>
+                        <button type="submit" class="tweet-btn2">Tweet</button>
+                    </div>
+
+                </form>
+            </div>
+
+
+        </div>
+        <!-- logout modal -->
+        <div class="logout-modal">
+            <div class="twitter-container">
+                <i class="fab fa-twitter"></i>
+            </div>
+            <h3>Log out of Twitter?</h3>
+            <p class="confirm">You can always log back in at any time. If you just want to switch accounts, you can do
+                that by adding and existing accounts.</p>
+
+            <button class="logOut-confirm">Log out</button>
+            <button class="logOut-cancel">Cancel</button>
+        </div>
 
 
 
 
 
-    <script>
+        <script>
         const likeBtn = document.querySelectorAll(".like-btn");
         const count = document.querySelector(".likeCount");
         const forms = document.querySelectorAll(".dislike-btns");
@@ -294,7 +306,8 @@ if ($_SESSION["icon"]) {
             }
 
             form.addEventListener("click", (e) => {
-                var parent = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+                var parent = e.target.parentElement.parentElement.parentElement.parentElement
+                    .parentElement
                     .parentElement;
                 const id = parent.dataset.postId;
                 if (form.dataset.postId == id) {
@@ -328,12 +341,15 @@ if ($_SESSION["icon"]) {
                                 console.log(post.querySelector('.likeCount').textContent);
                                 if (post.querySelector('.likeCount').textContent < res) {
                                     post.querySelector('.heart-one').style.display = 'none'
-                                    post.querySelector('.heart-second').style.display = 'block'
+                                    post.querySelector('.heart-second').style.display =
+                                        'block'
                                     post.querySelector('.likeCount').style.color = 'red'
                                 } else {
                                     post.querySelector('.heart-one').style.display = 'block'
-                                    post.querySelector('.heart-second').style.display = 'none'
-                                    post.querySelector('.likeCount').style.color = 'rgba(0, 0, 0, 0.616)'
+                                    post.querySelector('.heart-second').style.display =
+                                        'none'
+                                    post.querySelector('.likeCount').style.color =
+                                        'rgba(0, 0, 0, 0.616)'
                                 }
                                 post.querySelector(".likeCount").textContent = res;
 
@@ -422,7 +438,7 @@ if ($_SESSION["icon"]) {
             gray.style.display = 'none';
             modalPost.style.display = 'none';
         })
-    </script>
+        </script>
 </body>
 
 </html>

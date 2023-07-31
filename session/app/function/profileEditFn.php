@@ -18,6 +18,7 @@ class profileEditFn{
     public $obj;
     public $imagePath;
     public $country;
+    public $location;
 
     public function __construct()
     {
@@ -30,7 +31,7 @@ class profileEditFn{
         if($this->user_id){
             if(!$this->username == ""){
                 $this->model->updateUsername($this->username, $this->user_id);
-                $_SESSION["username"] = $this->username;
+                $_SESSION["name"] = $this->username;
             }
             if(!$this->introduction == ""){
                 $this->model->updateIntro($this->introduction, $this->user_id);
@@ -60,7 +61,7 @@ class profileEditFn{
                 $_SESSION["icon"] = $this->filename;
             }
          
-            header("Location: ../../../index.php");
+            header("Location: ../../personalInfo.php");
         }
 
 
@@ -112,8 +113,12 @@ class profileEditFn{
       
 
         if($this->icon && $this->icon["tmp_name"]) {
+
+            if (!file_exists("../../images")) {
+                mkdir("../../images");
+            }
             $this->filename = $this->obj->randomString(8) . "/" . $this->icon["name"];
-            $this->imagePath = '../../../images/';
+            $this->imagePath = '../../images/';
 
             mkdir(dirname($this->imagePath. $this->filename));
             move_uploaded_file($this->icon["tmp_name"], $this->imagePath. $this->filename);

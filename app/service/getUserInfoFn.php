@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__). "../../model/model.php");
 
+session_start();
 
 $user_id = "";
 if(isset($_SESSION["user_id"])){
@@ -49,6 +50,14 @@ class getUserInfo{
             // print_r($_SESSION["userData"]);
             // exit;
             header("Location: ../../personalInfo.php");
+        }
+    }
+    
+    public function getUserDetail($user_id){
+        if(isset($_POST["user_id"])){
+           $this->model->getUser($user_id);
+           $_SESSION["userDetail"] = $this->model->getUser($user_id);
+            header("Location: ../../userDetail.php");
         }
     }
 }

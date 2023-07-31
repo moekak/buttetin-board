@@ -12,12 +12,12 @@ $postData = $_SESSION["postData"];
 // $userName = $_SESSION["username"];
 // $userEmail = $_SESSION["email"];
 $userIcon = '';
-if ($_SESSION['icon']) {
+if (isset($_SESSION['icon'])) {
     $userIcon = $_SESSION['icon'];
 }
 
 $userId = "";
-if ($_SESSION["user_id"]) {
+if (isset($_SESSION["user_id"])) {
     $userId = $_SESSION["user_id"];
 }
 
@@ -30,6 +30,7 @@ $postDetails = '';
 // print_r($_SESSION['post'])
 
 // print_r($postData) ;
+
 ?>
 
 
@@ -147,11 +148,16 @@ $postDetails = '';
                     <div class="flex-left gap3">
 
                         <div class="icon-containerDetail">
-                            <?php if ($post["icon"]) {?>
-                            <img src="<?php echo $path . $post["icon"] ?>" alt="" class="avatar">
-                            <?php } else {?>
-                            <img src="./assets/img/user-dummy.png" alt="" class="avatar">
-                            <?php }?>
+                            <form action="./app/controller/userDetailController.php" method="post">
+                                <input type="hidden" name="user_id" value="<?php echo $post["user_id"] ?>">
+                                <button type="submit" name="submit">
+                                    <?php if ($post["icon"]) {?>
+                                        <img src="<?php echo $path . $post["icon"] ?>" alt="" class="avatar">
+                                    <?php } else {?>
+                                        <img src="./assets/img/user-dummy.png" alt="" class="avatar">
+                                    <?php }?>
+                                </button>
+                            </form>
                         </div>
                         <div class="textDetail-container">
                             <p class="bold"><?php echo $post["name"] ?></p>

@@ -1,6 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) . "../../../app/function/profileEditFn.php");
+require_once(dirname(__FILE__) . "../../../../session/app/function/profileEditFn.php");
 
 $function = new profileEditFn();
 // echo $_POST["country"];

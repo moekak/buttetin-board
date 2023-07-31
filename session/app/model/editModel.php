@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 
 
 class editModel{
@@ -12,8 +11,8 @@ class editModel{
     }
 
     public function updateUsername($username,$user_id){
-        $statement = $this->pdo->prepare("UPDATE `user` SET username = :username  WHERE id = :id" );
-        $statement->bindValue(":username", $username);
+        $statement = $this->pdo->prepare("UPDATE `user` SET name = :name  WHERE id = :id" );
+        $statement->bindValue(":name", $username);
         $statement->bindValue(":id", $user_id);
         $statement->execute();
 

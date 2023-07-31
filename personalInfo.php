@@ -2,29 +2,67 @@
 
 session_start();
 
+$userDetail = "";
+if(isset($_SESSION["userDetail"])){
+    $userDetail = $_SESSION["userDetail"];
+}
+
+echo $userDetail;
+
 $path = "./images/";
 $path2 = "./images3/";
-$posts = $_SESSION["postData"];
+$posts = "";
+if (isset($_SESSION["postData"])) {
+    $posts = $_SESSION["postData"];
+}
 // print_r($_SESSION["userData"]);
 
-$userName = $_SESSION["name"];
-$userEmail = $_SESSION["phone"];
-$userIcon = $_SESSION["icon"];
-$login_name = $_SESSION["login_name"];
-$date = $_SESSION["created_at"];
-$introduction = $_SESSION["introduction"];
-$bg_img = $_SESSION["bg-img"];
+$userName = "";
+if (isset($_SESSION["name"])) {
+    $userName = $_SESSION["name"];
+}
+$userEmail = "";
+if (isset($_SESSION["phone"])) {
+    $userEmail = $_SESSION["phone"];
+}
+$userBirthday = "";
+if (isset($_SESSION["birthday"])) {
+    $userBirthday = $_SESSION["birthday"];
+}
+
+$userIcon = "";
+if (isset($_SESSION["icon"])) {
+    $userIcon = $_SESSION["icon"];
+}
+echo $userIcon;
+$login_name = "";
+if (isset($_SESSION["login_name"])) {
+    $login_name = $_SESSION["login_name"];
+}
+$date = "";
+if (isset($_SESSION["created_at"])) {
+    $date = $_SESSION["created_at"];
+}
+$introduction = "";
+if (isset($_SESSION["introduction"])) {
+    $introduction = $_SESSION["introduction"];
+}
+$bg_img = "";
+if (isset($_SESSION["bg-img"])) {
+    $bg_img = $_SESSION["bg-img"];
+}
 $country = '';
-if ($_SESSION["country"]) {
+if (isset($_SESSION["country"])) {
     $country = $_SESSION["country"];
 }
 
-$web = $_SESSION["web_site"];
+$web = "";
+if (isset($_SESSION["web_site"])) {
+    $web = $_SESSION["web_site"];
+}
 $dateTime = new DateTime($date);
 $month = $dateTime->format("F");
 $year = $dateTime->format("Y");
-
-echo $_SESSION["user_id"];
 
 ?>
 
@@ -102,9 +140,9 @@ echo $_SESSION["user_id"];
                     <div class="input-icon">
                         <div class="camera2 absolute">
                             <?php if ($userIcon) {?>
-                            <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon3">
+                                <img src="<?php echo $path . $userIcon ?>" alt="" class="user-icon3">
                             <?php } else {?>
-                            <img src="./assets/img/user-dummy.png" class="user-icon3">
+                                <img src="./assets/img/user-dummy.png" class="user-icon3">
                             <?php }?>
 
                         </div>
@@ -239,7 +277,7 @@ echo $_SESSION["user_id"];
                             <input type="file" name="icon" id="icon-btn">
                             <img id="displayImage2" src="#" alt="your image" style="display:none;" class="your-img2">
                         </div>
-                        <button class="next-btn3 skip-first"  name="submit">Skip it for now</button>
+                        <div class="next-btn3 skip-first">Skip it for now</div>
                         <button class="next-btn3 edit-next" type="submit" name="submit" id="skip1">Next</button>
                     </form>
                 </div>
@@ -269,14 +307,107 @@ echo $_SESSION["user_id"];
                         </div>
 
                         <input type="hidden" value="<?php echo $_SESSION["user_id"] ?>" name="user_id">
-                        <button class="next-btn3" type="submit" name="submit" id="skip2">Skip it for now</button>
+                        <div class="next-btn3 skip-second">Skip it for now</div>
+                        <button class="next-btn3" type="submit" name="submit" id="skip2">Next</button>
                     </form>
                 </div>
+            </div>
+            <!-- third page -->
+            <div class="edit-third">
+                <h1>Describe yourself</h1>
+                <p>What makes you special? Don't think too hard, just jave fun with it.</p>
+                <form action="./app/controller/editController.php" method="post" class="relative">
+                    <input type="text" name="introduction" placeholder="Your bio" maxlength="160" class="input-bio">
+                    <div class="count-bio" id="count-bio">0/160</div>
+                    <input type="hidden" value="<?php echo $_SESSION["user_id"] ?>" name="user_id">
+                    <div class="padding30"></div>
+                    <div class="next-btn3 skip-third">Skip it for now</div>
+                    <button class="next-btn3" type="submit" name="submitBio" id="skip3" value="submit">Next</button>
+
+                </form>
+            </div>
+            <!-- forth page -->
+            <div class="edit-forth">
+                <h1>Where do you live</h1>
+                <p>Find accounts in the same location as you.</p>
+                <form action="./app/controller/editController.php" method="post" class="relative">
+                    <input type="text" name="country" placeholder="Location" maxlength="30" class="input-location">
+                    <div class="count-bio" id="count-location">0/30</div>
+                    <input type="hidden" value="<?php echo $_SESSION["user_id"] ?>" name="user_id">
+                    <div class="padding30"></div>
+                    <div class="next-btn3 skip-forth">Skip it for now</div>
+                    <button class="next-btn3" type="submit" name="submitLocation" id="skip4"
+                        value="submit">Next</button>
+
+                </form>
             </div>
         </div>
 
     </div>
+    <div class="modal-edit-profile2">
+        <div class="edit-profile-container2">
+            <div class="edit-profile2">
+                <div class="edit-title">
+                    <p class="bold">×</p>
+                    <p class="bold">Edit profile</p>
+                </div>
+                <form action="./app/controller/editController.php" method="post" enctype="multipart/form-data"
+                    class="edit-profile-form">
+                    <div class="gray2 relative">
+                        <div class="icon">
+                            <img src="./assets/img/camera.png" alt="" class="bg-pic">
+                            <input type="file" name="bg-img" id="icon-btn">
+                            <img id="displayImage2" src="#" alt="your image" style="display:none;" class="your-img2">
+                        </div>
+                    </div>
+                    <div class="edit-icon-container2">
+                        <div class="icon">
+                            <?php if ($userIcon) {?>
+                                <img src="<?php echo $path . $userIcon ?>" alt="" class="user-dummy3">
+                            <?php } else {?>
+                                <img src="./assets/img/user-dummy.png" alt="" class="user-dummy3">
+                            <?php }?>
+                            <input type="file" name="icon" id="icon-btn">
+                            <img id="displayImage2" src="#" alt="your image" style="display:none;" class="your-img2">
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="user_id" value="<?php echo $_SESSION["user_id"]?>">
+                    <div class="input-name-edit">
+                        <input type="text" name="username" placeholder="Name" class="name-edit">
+                    </div>
+                    <div class="input-name-edit">
+                        <textarea type="text" name="introduction" placeholder="Bio" class="bio-edit"
+                            rows="3"></textarea>
+                    </div>
+                    <div class="input-name-edit">
+                        <input type="text" name="country" placeholder="Location" class="location-edit">
+                    </div>
+                    <div class="input-name-edit">
+                        <input type="text" name="web_site" placeholder="Web" class="website-edit">
+                    </div>
+                    <!-- <input type="hidden" value="<?php echo $_SESSION["user_id"] ?>" name="user_id"> -->
+                    <!-- <div class="next-btn3 skip-second">Skip it for now</div>
+                    <button class="next-btn3" type="submit" name="submit" id="skip2">Next</button> -->
+                    <div class="birthday-edit">
+                        <div class="birthday-wrapper">
+                            <p class="birthDate">Birth date</p>
+                            <p class="birthday-confirm"><?php echo $userBirthday ?></p>  
+                        </div>
+                        <button type="submit" value="save" name="save" class="save-edit">save</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
+    // document.addEventListener('visibilitychange', function() {
+    //     if (document.hidden) {
+    //         localStorage.clear();
+    //     }
+    // });
+
     const likeBtn = document.querySelectorAll(".like-btn");
     const count = document.querySelector(".likeCount");
 
@@ -312,16 +443,17 @@ echo $_SESSION["user_id"];
 
     const editBtn = document.getElementById("edit-btn")
     const gray = document.querySelector(".bg-gray")
-    const modalEdit = document.querySelector(".modal-edit-profile")
+    const modalEdit = document.querySelector(".modal-edit-profile2")
     const skip1 = document.getElementById("skip1")
 
-    document.querySelector(".skip-first").addEventListener("click", ()=>{
+    document.querySelector(".skip-first").addEventListener("click", () => {
         document.querySelector(".edit-second").style.display = "block"
         document.querySelector(".edit-first").style.display = "none"
     })
     editBtn.addEventListener("click", () => {
         gray.style.display = "block"
-        modalEdit.style.display = "block"
+        modalEdit.style.display = "flex"
+        // document.querySelector(".edit-first").style.display = "block"
     })
 
 
@@ -339,10 +471,13 @@ echo $_SESSION["user_id"];
         var reader = new FileReader();
 
         reader.onload = (e) => {
-            const displayImage = document.getElementById("displayImage2");
-            displayImage.src = e.target.result;
-            displayImage.style.display = "block"
-            document.querySelector(".user-dummy").style.opacity = 0;
+            const displayImages = document.querySelectorAll(".user-dummy")
+            displayImages.forEach((displayImage) => {
+                displayImage.src = e.target.result;
+            })
+            // displayImage.src = e.target.result;
+            // displayImage.style.display = "block"
+            1
         }
 
         reader.readAsDataURL(e.target.files[0])
@@ -369,7 +504,6 @@ echo $_SESSION["user_id"];
 
 
     if (localStorage.getItem("step1")) {
-        console.log("aaaa");
         document.querySelector(".edit-second").style.display = "block"
         document.querySelector(".edit-first").style.display = "none"
         gray.style.display = "block"
@@ -380,9 +514,16 @@ echo $_SESSION["user_id"];
     // seocnd step uploading bg img
     const btn2 = document.getElementById("skip2")
     const upload2 = document.getElementById("bg-upload")
+    const skip2 = document.querySelector(".skip-second");
+
+    skip2.addEventListener("click", () => {
+        document.querySelector(".edit-third").style.display = "block"
+        document.querySelector(".edit-second").style.display = "none"
+    })
 
     upload2.addEventListener("change", (e) => {
-        btn2.style.background = "black"
+        btn2.style.display = "block"
+        skip2.style.display = "none"
         btn2.innerHTML = "Next"
 
         var reader = new FileReader();
@@ -396,22 +537,100 @@ echo $_SESSION["user_id"];
 
         reader.readAsDataURL(e.target.files[0])
 
-        if (btn2.innerHTML = "Next") {
-            btn2.addEventListener("click", () => {
-                localStorage.setItem("step2", "done")
-                localStorage.removeItem("step1", "done")
-            })
 
-        }
+        btn2.addEventListener("click", () => {
+            localStorage.setItem("step2", "done")
+            localStorage.removeItem("step1", "done")
+        })
+
 
     })
 
     if (localStorage.getItem("step2")) {
         document.querySelector(".edit-third").style.display = "block"
         document.querySelector(".edit-second").style.display = "none"
+        document.querySelector(".edit-first").style.display = "none"
         gray.style.display = "block"
         modalEdit.style.display = "block"
     }
+
+    // third step ( adding bio )
+    const bio = document.querySelector(".input-bio");
+    const countBio = document.getElementById("count-bio")
+    const btn3 = document.getElementById("skip3")
+    const skip3 = document.querySelector(".skip-third")
+
+    skip3.addEventListener("click", () => {
+        document.querySelector(".edit-third").style.display = "none"
+        document.querySelector(".edit-forth").style.display = "block"
+    })
+
+    bio.addEventListener("input", (e) => {
+        value = bio.value
+        valueCount = value.length;
+        countBio.innerHTML = valueCount + "/" + 160;
+        if (valueCount <= 0) {
+            skip3.style.display = "flex"
+            btn3.style.display = "none"
+        } else {
+            skip3.style.display = "none"
+            btn3.style.display = "flex"
+        }
+
+    })
+
+    btn3.addEventListener("click", () => {
+        localStorage.setItem("step3", "done");
+        localStorage.removeItem("step2")
+    })
+
+    if (localStorage.getItem("step3")) {
+        document.querySelector(".edit-third").style.display = "none"
+        document.querySelector(".edit-forth").style.display = "block"
+        document.querySelector(".edit-first").style.display = "none"
+        document.querySelector(".edit-second").style.display = "none"
+        gray.style.display = "block"
+        modalEdit.style.display = "block"
+
+    }
+
+
+    // forth step
+
+    const locationInput = document.querySelector(".input-location")
+    const countLocation = document.getElementById("count-location");
+    const btn4 = document.getElementById("skip4")
+    const skip4 = document.querySelector(".skip-forth");
+
+    skip4.addEventListener("click", () => {
+        document.querySelector(".edit-forth").style.display = "none"
+        gray.style.display = "none"
+        modalEdit.style.display = "none"
+
+    })
+
+    locationInput.addEventListener("input", () => {
+
+        valueLocation = locationInput.value;
+        locationCount = valueLocation.length;
+        countLocation.innerHTML = locationCount + "/" + 30;
+        if (locationCount <= 0) {
+            skip4.style.display = "flex"
+            btn4.style.display = "none"
+        } else {
+            skip4.style.display = "none"
+            btn4.style.display = "flex"
+        }
+    })
+
+    btn4.addEventListener("click", () => {
+        document.querySelector(".edit-forth").style.display = "none"
+        document.querySelector(".edit-third").style.display = "none"
+        document.querySelector(".edit-second").style.display = "none"
+        document.querySelector(".edit-first").style.display = "none"
+        localStorage.removeItem("step3")
+
+    })
     </script>
 
 </body>
